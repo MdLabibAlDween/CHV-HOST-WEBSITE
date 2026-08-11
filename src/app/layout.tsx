@@ -58,8 +58,9 @@ export const metadata: Metadata = {
   icons: {
     icon: env.faviconPath,
     shortcut: env.faviconPath,
-    apple: env.logoPath,
+    apple: "/icon-192.png",
   },
+  manifest: "/manifest.webmanifest",
   robots: { index: true, follow: true },
 };
 
