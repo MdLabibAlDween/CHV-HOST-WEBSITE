@@ -32,6 +32,13 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# runtime content overrides written by the admin editor
+/content/
+
+# runtime logs
+/logs/
 
 # vercel
 .vercel

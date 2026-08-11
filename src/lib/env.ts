@@ -1,0 +1,164 @@
+/**
+ * Typed environment configuration.
+ *
+ * All private credentials are read ONLY here (server-side) and never
+ * exposed to the browser. Anything prefixed NEXT_PUBLIC_ is safe for
+ * the client bundle; everything else must stay in server code.
+ */
+
+export type Env = {
+  siteName: string;
+  siteTagline: string;
+  siteDomain: string;
+  supportEmail: string;
+  salesEmail: string;
+  supportPhone: string;
+  companyAddress: string;
+
+  logoPath: string;
+  faviconPath: string;
+  primaryColor: string;
+  secondaryColor: string;
+
+  gaId: string;
+  gtmId: string;
+  metaPixelId: string;
+
+  whmcsUrl: string;
+  whmcsApiUrl: string;
+  whmcsIdentifier: string;
+  whmcsSecret: string;
+  whmcsAccessKey: string;
+  useWhmcsProducts: boolean;
+  whmcsTimeoutMs: number;
+
+  whmHost: string;
+  whmUsername: string;
+  whmApiToken: string;
+
+  zinipayApiKey: string;
+  zinipayBaseUrl: string;
+  zinipaySandbox: boolean;
+  zinipayWebhookSecret: string;
+
+  appBaseUrl: string;
+  paymentSuccessUrl: string;
+  paymentCancelUrl: string;
+
+  domainRegistrar: string;
+  domainRegistrarApiKey: string;
+  domainRegistrarApiSecret: string;
+
+  adminPassword: string;
+  liveChatProviderUrl: string;
+
+  smtpHost: string;
+  smtpPort: number;
+  smtpUser: string;
+  smtpPass: string;
+  smtpFrom: string;
+};
+
+function str(name: string, fallback = ""): string {
+  const v = process.env[name];
+  return v === undefined || v === "" ? fallback : v;
+}
+
+function bool(name: string, fallback = false): boolean {
+  const v = process.env[name];
+  if (v === undefined || v === "") return fallback;
+  return v === "true" || v === "1" || v.toLowerCase() === "yes";
+}
+
+function num(name: string, fallback: number): number {
+  const v = process.env[name];
+  if (v === undefined || v === "") return fallback;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+const cached: Env = {
+  siteName: str("SITE_NAME", "CHV HOST"),
+  siteTagline: str("SITE_TAGLINE", "Cheap Hosting And VPS"),
+  siteDomain: str("SITE_DOMAIN", "https://yourdomain.com"),
+  supportEmail: str("SUPPORT_EMAIL", "support@yourdomain.com"),
+  salesEmail: str("SALES_EMAIL", "sales@yourdomain.com"),
+  supportPhone: str("SUPPORT_PHONE", "+880XXXXXXXXXX"),
+  companyAddress: str("COMPANY_ADDRESS", "Your Address, Bangladesh"),
+
+  logoPath: str("LOGO_PATH", "/logo.png"),
+  faviconPath: str("FAVICON_PATH", "/favicon.ico"),
+  primaryColor: str("PRIMARY_COLOR", "#4f46e5"),
+  secondaryColor: str("SECONDARY_COLOR", "#06b6d4"),
+
+  gaId: str("NEXT_PUBLIC_GA_ID"),
+  gtmId: str("NEXT_PUBLIC_GTM_ID"),
+  metaPixelId: str("NEXT_PUBLIC_META_PIXEL_ID"),
+
+  whmcsUrl: str("WHMCS_URL"),
+  whmcsApiUrl: str("WHMCS_API_URL"),
+  whmcsIdentifier: str("WHMCS_IDENTIFIER"),
+  whmcsSecret: str("WHMCS_SECRET"),
+  whmcsAccessKey: str("WHMCS_ACCESS_KEY"),
+  useWhmcsProducts: bool("USE_WHMCS_PRODUCTS", false),
+  whmcsTimeoutMs: num("WHMCS_TIMEOUT_MS", 8000),
+
+  whmHost: str("WHM_HOST"),
+  whmUsername: str("WHM_USERNAME"),
+  whmApiToken: str("WHM_API_TOKEN"),
+
+  zinipayApiKey: str("ZINIPAY_API_KEY"),
+  zinipayBaseUrl: str("ZINIPAY_BASE_URL", "https://api.zinipay.com"),
+  zinipaySandbox: bool("ZINIPAY_SANDBOX", true),
+  zinipayWebhookSecret: str("ZINIPAY_WEBHOOK_SECRET"),
+
+  appBaseUrl: str("APP_BASE_URL", "http://localhost:3000"),
+  paymentSuccessUrl: str("PAYMENT_SUCCESS_URL", "/payment/success"),
+  paymentCancelUrl: str("PAYMENT_CANCEL_URL", "/payment/cancelled"),
+
+  domainRegistrar: str("DOMAIN_REGISTRAR"),
+  domainRegistrarApiKey: str("DOMAIN_REGISTRAR_API_KEY"),
+  domainRegistrarApiSecret: str("DOMAIN_REGISTRAR_API_SECRET"),
+
+  adminPassword: str("ADMIN_PASSWORD", "change-me-before-deploy"),
+  liveChatProviderUrl: str("LIVE_CHAT_PROVIDER_URL"),
+
+  smtpHost: str("SMTP_HOST"),
+  smtpPort: num("SMTP_PORT", 587),
+  smtpUser: str("SMTP_USER"),
+  smtpPass: str("SMTP_PASS"),
+  smtpFrom: str("SMTP_FROM"),
+};
+
+/** Server-only configuration. Throws if imported from the browser bundle. */
+export function getEnv(): Env {
+  return cached;
+}
+
+/** True when WHMCS is configured with real values (not placeholders). */
+function whmcsConfigured(): boolean {
+  const url = cached.whmcsUrl.toLowerCase();
+  return Boolean(cached.whmcsUrl && !url.includes("yourdomain.com") && !url.includes("localhost"));
+}
+
+/** Public-safe configuration subset (no secrets). */
+export function getPublicEnv() {
+  return {
+    siteName: cached.siteName,
+    siteTagline: cached.siteTagline,
+    siteDomain: cached.siteDomain,
+    supportEmail: cached.supportEmail,
+    salesEmail: cached.salesEmail,
+    supportPhone: cached.supportPhone,
+    companyAddress: cached.companyAddress,
+    logoPath: cached.logoPath,
+    faviconPath: cached.faviconPath,
+    primaryColor: cached.primaryColor,
+    secondaryColor: cached.secondaryColor,
+    gaId: cached.gaId,
+    gtmId: cached.gtmId,
+    metaPixelId: cached.metaPixelId,
+    liveChatProviderUrl: cached.liveChatProviderUrl,
+    whmcsUrl: whmcsConfigured() ? cached.whmcsUrl : "",
+  };
+}
