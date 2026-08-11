@@ -49,21 +49,21 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-ink">
         <div className="bg-grid-dark absolute inset-0" aria-hidden="true" />
         <div
-          className="absolute -top-40 left-1/4 h-96 w-96 rounded-full opacity-20 blur-3xl"
+          className="absolute -top-40 left-1/4 h-96 w-96 rounded-full animate-pulse-glow blur-3xl"
           style={{
             backgroundImage: "linear-gradient(120deg, var(--brand-primary), var(--brand-secondary))",
           }}
           aria-hidden="true"
         />
         <div
-          className="absolute -bottom-32 right-10 h-80 w-80 rounded-full opacity-15 blur-3xl"
+          className="absolute -bottom-32 right-10 h-80 w-80 rounded-full animate-pulse-glow blur-3xl [animation-delay:3s]"
           style={{ background: "var(--brand-secondary)" }}
           aria-hidden="true"
         />
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-28">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold text-ink-soft">
+            <p className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold text-ink-soft">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -71,22 +71,22 @@ export default async function HomePage() {
               {content.company.tagline} · {content.stats[3]?.value ?? "24/7"} support
             </p>
 
-            <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="animate-fade-up mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl [animation-delay:100ms]">
               {content.hero.headline}
               <br />
               <span className="gradient-text">{content.hero.highlight}</span>
             </h1>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-soft sm:text-lg">
+            <p className="animate-fade-up mt-5 max-w-lg text-base leading-relaxed text-ink-soft sm:text-lg [animation-delay:200ms]">
               {content.hero.subheadline}
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="animate-fade-up mt-8 flex flex-col gap-3 sm:flex-row [animation-delay:300ms]">
               <Link
                 href={content.hero.primaryCta.href}
-                className="btn-gradient inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold"
+                className="btn-gradient group inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold"
               >
                 {content.hero.primaryCta.label}
-                <Icon name="arrow-right" size={17} />
+                <Icon name="arrow-right" size={17} className="transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 href={content.hero.secondaryCta.href}
@@ -97,7 +97,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+            <ul className="animate-fade-up mt-8 flex flex-wrap gap-x-6 gap-y-2 [animation-delay:400ms]">
               {content.hero.points.map((point) => (
                 <li key={point} className="flex items-center gap-2 text-sm text-ink-soft">
                   <Icon name="check-circle" size={16} className="text-emerald-400" />
@@ -108,14 +108,15 @@ export default async function HomePage() {
           </div>
 
           {/* Hero visual — original, CSS-built */}
-          <div className="relative hidden lg:block" aria-hidden="true">
-            <div className="glass-card relative rounded-3xl p-6">
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-rose-400/80" />
-                <span className="h-3 w-3 rounded-full bg-amber-400/80" />
-                <span className="h-3 w-3 rounded-full bg-emerald-400/80" />
-              </div>
-              <pre className="mt-5 overflow-x-auto text-[13px] leading-relaxed text-ink-soft">
+          <div className="animate-zoom-in relative hidden lg:block [animation-delay:250ms]" aria-hidden="true">
+            <div className="animate-float-slow">
+              <div className="glass-card relative rounded-3xl p-6">
+                <div className="flex items-center gap-2">
+                  <span className="h-3 w-3 rounded-full bg-rose-400/80" />
+                  <span className="h-3 w-3 rounded-full bg-amber-400/80" />
+                  <span className="h-3 w-3 rounded-full bg-emerald-400/80" />
+                </div>
+                <pre className="mt-5 overflow-x-auto text-[13px] leading-relaxed text-ink-soft">
 {`$ chv deploy --plan business
 ✓ Hosting account created
 ✓ SSL certificate issued
@@ -125,23 +126,24 @@ export default async function HomePage() {
   Server     LiteSpeed · NVMe
   Uptime     ██████████ 99.9%
   Speed      0.12s TTFB`}
-              </pre>
-              <div className="mt-5 grid grid-cols-3 gap-3">
-                <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-center">
-                  <p className="text-lg font-extrabold text-white">99.9%</p>
-                  <p className="text-[10px] uppercase tracking-wider text-ink-soft">Uptime</p>
-                </div>
-                <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-center">
-                  <p className="text-lg font-extrabold text-white">NVMe</p>
-                  <p className="text-[10px] uppercase tracking-wider text-ink-soft">Storage</p>
-                </div>
-                <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-center">
-                  <p className="text-lg font-extrabold text-white">Lite</p>
-                  <p className="text-[10px] uppercase tracking-wider text-ink-soft">Speed</p>
+                </pre>
+                <div className="mt-5 grid grid-cols-3 gap-3">
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-center">
+                    <p className="text-lg font-extrabold text-white">99.9%</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-soft">Uptime</p>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-center">
+                    <p className="text-lg font-extrabold text-white">NVMe</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-soft">Storage</p>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-center">
+                    <p className="text-lg font-extrabold text-white">Lite</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-soft">Speed</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="glass-card absolute -bottom-8 -left-8 hidden rounded-2xl px-5 py-4 xl:block">
+            <div className="glass-card absolute -bottom-8 -left-8 hidden rounded-2xl px-5 py-4 xl:block animate-float">
               <p className="flex items-center gap-2 text-sm font-semibold text-white">
                 <Icon name="shield" size={18} className="text-emerald-400" />
                 DDoS Protection Active
