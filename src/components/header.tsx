@@ -165,7 +165,14 @@ export function Header() {
                 <li key={item.label}>
                   {item.children ? (
                     <div className="mb-1">
-                      <p className="px-3 py-2 text-sm font-semibold text-slate-900">{item.label}</p>
+                      <Link
+                        href={item.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="flex items-center justify-between px-3 py-2 text-sm font-semibold text-slate-900"
+                      >
+                        {item.label}
+                        <Icon name="chevron-right" size={14} className="text-slate-400" />
+                      </Link>
                       <ul className="ml-3 border-l border-border-soft pl-2">
                         {item.children.map((child) => (
                           <li key={child.href}>
