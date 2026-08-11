@@ -64,6 +64,16 @@ function str(name: string, fallback = ""): string {
   return v === undefined || v === "" ? fallback : v;
 }
 
+/**
+ * Public value reader: prefers the NEXT_PUBLIC_ alias (which is also
+ * inlined into client bundles), falls back to the legacy name and then
+ * to a default. Server components use this; client components read the
+ * same NEXT_PUBLIC_ names statically in public-env.ts.
+ */
+function pub(name: string, fallback = ""): string {
+  return str(`NEXT_PUBLIC_${name}`, str(name, fallback));
+}
+
 function bool(name: string, fallback = false): boolean {
   const v = process.env[name];
   if (v === undefined || v === "") return fallback;
@@ -78,24 +88,24 @@ function num(name: string, fallback: number): number {
 }
 
 const cached: Env = {
-  siteName: str("SITE_NAME", "CHV HOST"),
-  siteTagline: str("SITE_TAGLINE", "Cheap Hosting And VPS"),
-  siteDomain: str("SITE_DOMAIN", "https://yourdomain.com"),
-  supportEmail: str("SUPPORT_EMAIL", "support@yourdomain.com"),
-  salesEmail: str("SALES_EMAIL", "sales@yourdomain.com"),
-  supportPhone: str("SUPPORT_PHONE", "+880XXXXXXXXXX"),
-  companyAddress: str("COMPANY_ADDRESS", "Your Address, Bangladesh"),
+  siteName: pub("SITE_NAME", "CHV HOST"),
+  siteTagline: pub("SITE_TAGLINE", "Cheap Hosting And VPS"),
+  siteDomain: pub("SITE_DOMAIN", "https://yourdomain.com"),
+  supportEmail: pub("SUPPORT_EMAIL", "support@yourdomain.com"),
+  salesEmail: pub("SALES_EMAIL", "sales@yourdomain.com"),
+  supportPhone: pub("SUPPORT_PHONE", "+880XXXXXXXXXX"),
+  companyAddress: pub("COMPANY_ADDRESS", "Your Address, Bangladesh"),
 
-  logoPath: str("LOGO_PATH", "/logo.png"),
-  faviconPath: str("FAVICON_PATH", "/favicon.ico"),
-  primaryColor: str("PRIMARY_COLOR", "#4f46e5"),
-  secondaryColor: str("SECONDARY_COLOR", "#06b6d4"),
+  logoPath: pub("LOGO_PATH", "/logo.png"),
+  faviconPath: pub("FAVICON_PATH", "/favicon.ico"),
+  primaryColor: pub("PRIMARY_COLOR", "#4f46e5"),
+  secondaryColor: pub("SECONDARY_COLOR", "#06b6d4"),
 
-  gaId: str("NEXT_PUBLIC_GA_ID"),
-  gtmId: str("NEXT_PUBLIC_GTM_ID"),
-  metaPixelId: str("NEXT_PUBLIC_META_PIXEL_ID"),
+  gaId: pub("GA_ID"),
+  gtmId: pub("GTM_ID"),
+  metaPixelId: pub("META_PIXEL_ID"),
 
-  whmcsUrl: str("WHMCS_URL"),
+  whmcsUrl: pub("WHMCS_URL"),
   whmcsApiUrl: str("WHMCS_API_URL"),
   whmcsIdentifier: str("WHMCS_IDENTIFIER"),
   whmcsSecret: str("WHMCS_SECRET"),
