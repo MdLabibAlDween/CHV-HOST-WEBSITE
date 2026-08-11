@@ -1,5 +1,5 @@
 import type { HostingPlan, BillingCycle } from "@/lib/site-types";
-import { getEnv } from "@/lib/env";
+import { getPublicEnv } from "@/lib/env";
 import { whmcsCartUrl } from "@/lib/whmcs";
 
 /**
@@ -8,7 +8,7 @@ import { whmcsCartUrl } from "@/lib/whmcs";
  *  - WHMCS unconfigured -> local checkout page (graceful message)
  */
 export function orderHref(plan: HostingPlan, cycle: BillingCycle, domain?: string): string {
-  const env = getEnv();
+  const env = getPublicEnv();
 
   if (plan.customOrderUrl) {
     const url = new URL(plan.customOrderUrl, env.siteDomain);
