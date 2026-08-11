@@ -25,6 +25,11 @@
 :root {
   --background: #ffffff;
   --foreground: #0b1220;
+
+  /* Brand colors (configurable via NEXT_PUBLIC_PRIMARY_COLOR /
+     NEXT_PUBLIC_SECONDARY_COLOR — inlined at build time). */
+  --brand-primary: #4f46e5;
+  --brand-secondary: #06b6d4;
 }
 
 body {

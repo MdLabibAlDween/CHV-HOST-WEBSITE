@@ -72,14 +72,6 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <head>
-        <style>{`
-          :root {
-            --brand-primary: ${env.primaryColor};
-            --brand-secondary: ${env.secondaryColor};
-          }
-        `}</style>
-      </head>
       <body className="flex min-h-full flex-col">
         <a href="#main-content" className="skip-link">
           Skip to main content
