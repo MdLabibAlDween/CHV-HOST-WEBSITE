@@ -79,11 +79,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             --brand-secondary: ${env.secondaryColor};
           }
         `}</style>
-        <script
-          dangerouslySetInnerHTML={{ __html: `window.__CHV_ENV__ = ${JSON.stringify(env)};` }}
-        />
       </head>
       <body className="flex min-h-full flex-col">
+        <Script id="chv-env" strategy="beforeInteractive">
+          {`window.__CHV_ENV__ = ${JSON.stringify(env)};`}
+        </Script>
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
