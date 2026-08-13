@@ -102,13 +102,13 @@ export default function AdminPage() {
   if (!authed) {
     return (
       <div className="mx-auto max-w-md px-4 py-20">
-        <div className="rounded-3xl border border-border-soft bg-white p-8 shadow-sm">
-          <h1 className="text-xl font-extrabold text-slate-900">Admin Login</h1>
+        <div className="rounded-3xl border border-border-soft bg-card p-8 shadow-sm dark:border-white/10">
+          <h1 className="text-xl font-extrabold text-slate-900 dark:text-slate-100">Admin Login</h1>
           <p className="mt-2 text-sm text-muted">
-            Enter the admin password from your <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">.env</code> file.
+            Enter the admin password from your <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs dark:bg-white/10">.env</code> file.
           </p>
           <form onSubmit={login} className="mt-6 space-y-4">
-            <label htmlFor="admin-password" className="block text-sm font-semibold text-slate-700">
+            <label htmlFor="admin-password" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
               Password
             </label>
             <input
@@ -116,7 +116,7 @@ export default function AdminPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-11 w-full rounded-xl border border-border-soft px-4 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="h-11 w-full rounded-xl border border-border-soft bg-card px-4 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-white/10 dark:text-slate-100"
               autoFocus
             />
             {notice?.type === "err" && <p className="text-sm text-rose-600">{notice.text}</p>}
@@ -133,15 +133,15 @@ export default function AdminPage() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900">Site Content Editor</h1>
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">Site Content Editor</h1>
           <p className="mt-1 text-sm text-muted">
-            Edits are stored in <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">./content/overrides.json</code> and merged over defaults.
+            Edits are stored in <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs dark:bg-white/10">./content/overrides.json</code> and merged over defaults.
           </p>
         </div>
         <button
           type="button"
           onClick={logout}
-          className="rounded-lg border border-border-soft px-4 py-2 text-sm font-semibold text-slate-600 hover:border-rose-200 hover:text-rose-600"
+          className="rounded-lg border border-border-soft px-4 py-2 text-sm font-semibold text-slate-600 hover:border-rose-200 hover:text-rose-600 dark:border-white/10 dark:text-slate-400"
         >
           Logout
         </button>
@@ -155,7 +155,7 @@ export default function AdminPage() {
               type="button"
               onClick={() => setActive(key)}
               className={`shrink-0 rounded-lg px-4 py-2 text-left text-sm font-semibold transition-colors ${
-                active === key ? "btn-gradient text-white" : "text-slate-600 hover:bg-slate-100"
+                active === key ? "btn-gradient text-white" : "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10"
               }`}
             >
               {key}
@@ -164,7 +164,7 @@ export default function AdminPage() {
         </nav>
 
         <div className="space-y-4">
-          <label htmlFor={`edit-${active}`} className="block text-sm font-semibold text-slate-700">
+          <label htmlFor={`edit-${active}`} className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
             Edit <span className="text-primary">content.{active}</span> (JSON)
           </label>
           <textarea
