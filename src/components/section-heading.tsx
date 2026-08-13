@@ -14,13 +14,13 @@ export function SectionHeading({ eyebrow, title, subtitle, align = "center", dar
       )}
       <h2
         className={`mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl ${
-          dark ? "text-white" : "text-slate-900"
+          dark ? "text-white" : "text-slate-900 dark:text-slate-100"
         }`}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-4 text-base leading-relaxed sm:text-lg ${dark ? "text-ink-soft" : "text-muted"}`}>
+        <p className={`mt-4 text-base leading-relaxed sm:text-lg ${dark ? "text-ink-soft" : "text-muted dark:text-slate-400"}`}>
           {subtitle}
         </p>
       )}
