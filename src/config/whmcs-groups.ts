@@ -52,5 +52,23 @@ export const WHMCS_GID_MAP: Record<string, PlanCategory> = {
   "1": "bdix",
 };
 
+/**
+ * Store slug → category. WHMCS includes the group's store URL in every
+ * product (product_url, e.g. .../store/bdix-hosting/cheap-bdix), so
+ * products are routed to the right page automatically. Add a line here
+ * if you create a brand-new group in WHMCS.
+ */
+export const STORE_SLUG_MAP: Record<string, PlanCategory> = {
+  "bdix-hosting": "bdix",
+  "wordpress-hosting": "wordpress",
+  "reseller-hosting": "reseller",
+  "bdix-vps-rdp": "bdix-vps",
+  "windows-server-rdp": "windows-rdp",
+  "managed-vps": "managed-vps",
+  "ivac-service": "ivac",
+  "dedicated-server": "dedicated",
+  license: "license",
+};
+
 /** Category used when a WHMCS group name/gid is not in the maps above. */
 export const FALLBACK_CATEGORY: PlanCategory = "bdix";

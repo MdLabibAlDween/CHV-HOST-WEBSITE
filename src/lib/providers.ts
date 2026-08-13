@@ -3,7 +3,7 @@ import { loadPlans } from "@/lib/site-config";
 import { whmcsRequest } from "@/lib/whmcs";
 import { getEnv } from "@/lib/env";
 import { log } from "@/lib/logger";
-import { WHMCS_GROUP_MAP, WHMCS_GID_MAP, FALLBACK_CATEGORY } from "@/config/whmcs-groups";
+import { WHMCS_GROUP_MAP, WHMCS_GID_MAP, STORE_SLUG_MAP, FALLBACK_CATEGORY } from "@/config/whmcs-groups";
 
 /**
  * Unified product/pricing provider.
@@ -48,10 +48,16 @@ function categoryForGroup(group: string): PlanCategory {
   return FALLBACK_CATEGORY;
 }
 
-/** Resolve a product's category: explicit gid map first, then groupname, then fallback. */
+/** Resolve a product's category: explicit gid → store slug → groupname → fallback. */
 function categoryForProduct(p: Record<string, unknown>): PlanCategory {
   const gid = typeof p.gid === "string" ? p.gid : String(p.gid ?? "");
   if (gid && WHMCS_GID_MAP[gid]) return WHMCS_GID_MAP[gid];
+
+  const url = typeof p.product_url === "string" ? p.product_url : "";
+  const slugMatch = url.match(/\/store\/([^/?]+)/);
+  const slug = slugMatch ? slugMatch[1] : "";
+  if (slug && STORE_SLUG_MAP[slug]) return STORE_SLUG_MAP[slug];
+
   if (typeof p.groupname === "string" && p.groupname) return categoryForGroup(p.groupname);
   return FALLBACK_CATEGORY;
 }
