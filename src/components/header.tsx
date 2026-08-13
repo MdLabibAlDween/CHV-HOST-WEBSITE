@@ -120,7 +120,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const clientAreaUrl = env.whmcsUrl ? `${env.whmcsUrl.replace(/\/$/, "")}/clientarea.php` : "/client-area";
+  const clientAreaUrl = "/client-area";
 
   return (
     <header

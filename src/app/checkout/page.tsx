@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { whmcsCartUrl } from "@/lib/whmcs";
+import { fetchPlans } from "@/lib/providers";
 import { loadPlans } from "@/lib/site-config";
 import { getEnv } from "@/lib/env";
 import { Icon } from "@/components/icons";
@@ -13,9 +14,11 @@ export const metadata: Metadata = {
 };
 
 /**
- * Order entry point. When WHMCS is configured this redirects into the
- * WHMCS cart (the billing source of truth). Otherwise it shows a
- * graceful message so the flow never dead-ends.
+ * Order entry point. When WHMCS is configured, checkout always happens
+ * in WHMCS (the billing source of truth): the plan is resolved from the
+ * live WHMCS-synced list and the visitor is redirected into the WHMCS
+ * cart with the right product and billing cycle. The graceful message
+ * only appears when WHMCS is not configured at all.
  */
 export default async function CheckoutPage({
   searchParams,
@@ -24,7 +27,9 @@ export default async function CheckoutPage({
 }) {
   const env = getEnv();
   const { plan: planId, cycle = "monthly", domain } = await searchParams;
-  const plan = loadPlans().find((p) => p.id === planId);
+
+  const { plans } = await fetchPlans();
+  const plan = plans.find((p) => p.id === planId) ?? loadPlans().find((p) => p.id === planId);
   const validCycle = plan?.billingCycles.includes(cycle as BillingCycle) ? (cycle as BillingCycle) : "monthly";
 
   const cartUrl = plan?.whmcsPid
@@ -32,6 +37,11 @@ export default async function CheckoutPage({
     : "";
   if (cartUrl) {
     redirect(cartUrl);
+  }
+
+  const hasBilling = Boolean(env.whmcsUrl && env.whmcsApiUrl);
+  if (hasBilling) {
+    redirect(`${env.whmcsUrl.replace(/\/$/, "")}/cart.php`);
   }
 
   return (

@@ -56,9 +56,7 @@ export function Footer() {
     { title: "Legal", links: LEGAL_LINKS },
   ];
 
-  const clientAreaUrl = env.whmcsUrl
-    ? `${env.whmcsUrl.replace(/\/$/, "")}/clientarea.php`
-    : "/client-area";
+  const clientAreaUrl = "/client-area";
 
   return (
     <footer className="border-t border-white/10 bg-ink text-slate-300">
