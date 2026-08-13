@@ -23,17 +23,17 @@ export default function TermsPage() {
         crumb="Terms"
       />
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 dark:bg-transparent">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <div className="space-y-8">
             {sections.map((section) => (
               <div key={section.heading}>
-                <h2 className="text-lg font-extrabold text-slate-900">{section.heading}</h2>
+                <h2 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">{section.heading}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">{section.body}</p>
               </div>
             ))}
           </div>
-          <div className="mt-12 rounded-2xl border border-border-soft bg-slate-50 p-6 text-sm text-muted">
+          <div className="mt-12 rounded-2xl border border-border-soft bg-slate-50 p-6 text-sm text-muted dark:border-white/10 dark:bg-white/5">
             Questions about these terms? Contact us at{" "}
             <a href={`mailto:${env.supportEmail}`} className="font-semibold text-primary hover:underline">
               {env.supportEmail}

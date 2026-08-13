@@ -154,7 +154,7 @@ export default async function HomePage() {
       </section>
 
       {/* ------------------------------ Statistics ----------------------------- */}
-      <section className="border-b border-border-soft bg-white" aria-label="Company statistics">
+      <section className="border-b border-border-soft bg-white dark:border-white/10 dark:bg-transparent" aria-label="Company statistics">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-12 sm:px-6 md:grid-cols-5 lg:px-8">
           {content.stats.map((stat) => (
             <div key={stat.label} className="text-center">
@@ -171,7 +171,7 @@ export default async function HomePage() {
       </section>
 
       {/* --------------------------- Hosting categories -------------------------- */}
-      <section className="bg-slate-50 py-20" aria-labelledby="categories-heading">
+      <section className="bg-slate-50 py-20 dark:bg-white/5" aria-labelledby="categories-heading">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="What we offer"
@@ -183,15 +183,15 @@ export default async function HomePage() {
               <Link
                 key={category.id}
                 href={category.href}
-                className="group rounded-2xl border border-border-soft bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-slate-900/5"
+                className="group rounded-2xl border border-border-soft bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-slate-900/5 dark:border-white/10 dark:hover:shadow-black/30"
               >
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl btn-gradient text-white">
                   <Icon name={CATEGORY_ICONS[category.id] ?? "globe"} size={22} />
                 </span>
-                <h3 className="mt-4 text-base font-bold text-slate-900">{category.title}</h3>
+                <h3 className="mt-4 text-base font-bold text-slate-900 dark:text-slate-100">{category.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted">{category.description}</p>
                 <p className="mt-3 text-sm">
-                  <span className="font-extrabold text-slate-900">{category.startingPrice}</span>
+                  <span className="font-extrabold text-slate-900 dark:text-slate-100">{category.startingPrice}</span>
                 </p>
                 <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                   {category.cta}
@@ -208,7 +208,7 @@ export default async function HomePage() {
       </section>
 
       {/* --------------------------- Featured plans --------------------------- */}
-      <section className="bg-white py-20" aria-labelledby="plans-heading">
+      <section className="bg-white py-20 dark:bg-transparent" aria-labelledby="plans-heading">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Web hosting"
@@ -249,7 +249,7 @@ export default async function HomePage() {
       </section>
 
       {/* ----------------------------- Why choose us ---------------------------- */}
-      <section className="bg-white py-20" aria-labelledby="why-heading">
+      <section className="bg-white py-20 dark:bg-transparent" aria-labelledby="why-heading">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Why CHV HOST"
@@ -270,17 +270,17 @@ export default async function HomePage() {
       </section>
 
       {/* ----------------------------- Infrastructure ---------------------------- */}
-      <section className="border-y border-border-soft bg-slate-50 py-14" aria-labelledby="infra-heading">
+      <section className="border-y border-border-soft bg-slate-50 py-14 dark:border-white/10 dark:bg-white/5" aria-labelledby="infra-heading">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 lg:flex-row">
-            <h2 id="infra-heading" className="text-xl font-extrabold text-slate-900 sm:text-2xl">
+            <h2 id="infra-heading" className="text-xl font-extrabold text-slate-900 sm:text-2xl dark:text-slate-100">
               Enterprise-grade infrastructure
             </h2>
             <ul className="flex flex-wrap justify-center gap-2.5">
               {content.infrastructure.map((item) => (
                 <li
                   key={item}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border-soft bg-white px-4 py-2 text-sm font-semibold text-slate-700"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border-soft bg-card px-4 py-2 text-sm font-semibold text-slate-700 dark:border-white/10 dark:text-slate-300"
                 >
                   <Icon name="check-circle" size={15} className="text-emerald-500" />
                   {item}
@@ -292,7 +292,7 @@ export default async function HomePage() {
       </section>
 
       {/* ------------------------------ Testimonials ----------------------------- */}
-      <section className="bg-white py-20" aria-labelledby="reviews-heading">
+      <section className="bg-white py-20 dark:bg-transparent" aria-labelledby="reviews-heading">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Customer reviews"
@@ -308,7 +308,7 @@ export default async function HomePage() {
       </section>
 
       {/* --------------------------------- FAQ --------------------------------- */}
-      <section className="bg-slate-50 py-20" aria-labelledby="faq-heading">
+      <section className="bg-slate-50 py-20 dark:bg-white/5" aria-labelledby="faq-heading">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="FAQ"

@@ -36,11 +36,11 @@ export default async function CheckoutPage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-      <div className="rounded-3xl border border-border-soft bg-white p-8 text-center shadow-sm sm:p-12">
+      <div className="rounded-3xl border border-border-soft bg-card p-8 text-center shadow-sm sm:p-12 dark:border-white/10">
         <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-500">
           <Icon name="warning" size={26} />
         </span>
-        <h1 className="mt-5 text-2xl font-extrabold text-slate-900 sm:text-3xl">
+        <h1 className="mt-5 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-slate-100">
           Checkout is not ready yet
         </h1>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted sm:text-base">
@@ -49,9 +49,9 @@ export default async function CheckoutPage({
         </p>
 
         {plan && (
-          <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-border-soft bg-slate-50 p-4 text-left">
+          <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-border-soft bg-slate-50 p-4 text-left dark:border-white/10 dark:bg-white/5">
             <p className="text-xs font-semibold uppercase tracking-wider text-muted">Your selection</p>
-            <p className="mt-1 text-sm font-bold text-slate-900">
+            <p className="mt-1 text-sm font-bold text-slate-900 dark:text-slate-100">
               {plan.name}
               {domain ? ` + ${domain}` : ""}
             </p>
@@ -68,7 +68,7 @@ export default async function CheckoutPage({
           </a>
           <Link
             href="/pricing"
-            className="inline-flex items-center gap-2 rounded-xl border border-border-soft px-6 py-3 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary"
+            className="inline-flex items-center gap-2 rounded-xl border border-border-soft px-6 py-3 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary dark:border-white/10 dark:text-slate-300"
           >
             Back to Plans
           </Link>

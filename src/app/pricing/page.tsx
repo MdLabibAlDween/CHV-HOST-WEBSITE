@@ -29,7 +29,7 @@ export default async function PricingPage() {
         crumb="Pricing"
       />
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <PricingTabs
             categories={categories.map((c) => ({
@@ -41,7 +41,7 @@ export default async function PricingPage() {
         </div>
       </section>
 
-      <section className="border-t border-border-soft bg-slate-50 py-16">
+      <section className="border-t border-border-soft bg-slate-50 py-16 dark:border-white/10 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="FAQ"

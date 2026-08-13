@@ -35,11 +35,11 @@ export function StatusCard({
 }) {
   const meta = STATUS_META[status];
   return (
-    <div className="flex items-start justify-between gap-4 rounded-2xl border border-border-soft bg-white p-5">
+    <div className="flex items-start justify-between gap-4 rounded-2xl border border-border-soft bg-card p-5 dark:border-white/10">
       <div className="flex items-start gap-3.5">
         <span className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full ${meta.dot}`} aria-hidden="true" />
         <div>
-          <h3 className="text-sm font-bold text-slate-900">{name}</h3>
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">{name}</h3>
           <p className="mt-1 text-xs leading-relaxed text-muted">{note}</p>
         </div>
       </div>

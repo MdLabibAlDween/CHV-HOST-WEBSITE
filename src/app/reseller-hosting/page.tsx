@@ -47,13 +47,13 @@ export default async function ResellerHostingPage() {
         crumb="Reseller Hosting"
       />
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <CategoryPricing plans={categoryPlans} />
         </div>
       </section>
 
-      <section className="border-y border-border-soft bg-slate-50 py-16">
+      <section className="border-y border-border-soft bg-slate-50 py-16 dark:border-white/10 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="How it works"
@@ -61,11 +61,11 @@ export default async function ResellerHostingPage() {
           />
           <ol className="mx-auto mt-10 grid max-w-4xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {RESELLER_STEPS.map((step, index) => (
-              <li key={step.title} className="relative rounded-2xl border border-border-soft bg-white p-6">
+              <li key={step.title} className="relative rounded-2xl border border-border-soft bg-card p-6 dark:border-white/10">
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg btn-gradient text-sm font-extrabold text-white">
                   {index + 1}
                 </span>
-                <h3 className="mt-4 text-sm font-bold text-slate-900">{step.title}</h3>
+                <h3 className="mt-4 text-sm font-bold text-slate-900 dark:text-slate-100">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{step.description}</p>
               </li>
             ))}
@@ -73,7 +73,7 @@ export default async function ResellerHostingPage() {
         </div>
       </section>
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Everything included"
@@ -92,7 +92,7 @@ export default async function ResellerHostingPage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-16">
+      <section className="bg-slate-50 py-16 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="FAQ" title="Reseller questions" />
           <div className="mt-10">

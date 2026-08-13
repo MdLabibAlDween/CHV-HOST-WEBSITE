@@ -24,7 +24,7 @@ export default function StatusPage() {
         crumb="Status"
       />
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 dark:bg-transparent">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div
             className={`mb-8 flex items-center gap-4 rounded-2xl border p-6 ${
@@ -46,7 +46,7 @@ export default function StatusPage() {
               )}
             </span>
             <div>
-              <p className="text-sm font-extrabold text-slate-900 sm:text-base">
+              <p className="text-sm font-extrabold text-slate-900 sm:text-base dark:text-slate-100">
                 {allOperational ? "All systems operational" : "Some systems are experiencing issues"}
               </p>
               <p className="mt-0.5 text-xs text-muted sm:text-sm">
@@ -61,8 +61,8 @@ export default function StatusPage() {
             ))}
           </div>
 
-          <div className="mt-10 rounded-2xl border border-border-soft bg-slate-50 p-6 text-sm text-muted">
-            <p className="font-semibold text-slate-700">Need help with an outage?</p>
+          <div className="mt-10 rounded-2xl border border-border-soft bg-slate-50 p-6 text-sm text-muted dark:border-white/10 dark:bg-white/5">
+            <p className="font-semibold text-slate-700 dark:text-slate-300">Need help with an outage?</p>
             <p className="mt-1.5">
               If something isn&apos;t working for you, contact us immediately — we&apos;ll confirm
               whether it&apos;s a known issue.

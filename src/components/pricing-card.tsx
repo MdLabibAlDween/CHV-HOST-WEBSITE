@@ -18,10 +18,10 @@ export function PricingCard({
 
   return (
     <div
-      className={`relative flex h-full flex-col rounded-3xl border bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/8 ${
+      className={`relative flex h-full flex-col rounded-3xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/8 ${
         plan.popular
-          ? "border-transparent shadow-lg shadow-primary/15 [background:linear-gradient(#fff,#fff)_padding-box,linear-gradient(120deg,var(--brand-primary),var(--brand-secondary))_border-box]"
-          : "border-border-soft shadow-sm"
+          ? "border-transparent shadow-lg shadow-primary/15 [background:linear-gradient(var(--card),var(--card))_padding-box,linear-gradient(120deg,var(--brand-primary),var(--brand-secondary))_border-box]"
+          : "border-border-soft shadow-sm dark:border-white/10"
       }`}
     >
       {plan.badge && (
@@ -35,13 +35,13 @@ export function PricingCard({
         </span>
       )}
 
-      <h3 className="text-lg font-extrabold text-slate-900">{plan.name}</h3>
+      <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">{plan.name}</h3>
       <p className="mt-1 text-sm text-muted">{plan.tagline}</p>
 
       <div className="mt-5 flex items-baseline gap-1.5">
         {hasPrice ? (
           <>
-            <span className="text-4xl font-extrabold tracking-tight text-slate-900">
+            <span className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
               {formatMoney(price, currency)}
             </span>
             <span className="text-sm text-muted">{cyclePerLabel(cycle)}</span>
@@ -51,7 +51,7 @@ export function PricingCard({
         )}
       </div>
 
-      <ul className="mt-6 flex-1 space-y-2.5 text-sm text-slate-700">
+      <ul className="mt-6 flex-1 space-y-2.5 text-sm text-slate-700 dark:text-slate-300">
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-start gap-2.5">
             <Icon name="check" size={16} className="mt-0.5 shrink-0 text-emerald-500" />

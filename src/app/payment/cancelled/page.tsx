@@ -21,11 +21,11 @@ export default async function PaymentCancelledPage({
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-20 sm:px-6">
-      <div className="rounded-3xl border border-border-soft bg-white p-8 text-center shadow-sm sm:p-12">
+      <div className="rounded-3xl border border-border-soft bg-card p-8 text-center shadow-sm sm:p-12 dark:border-white/10">
         <span className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-amber-50 text-amber-500">
           <Icon name="warning" size={32} />
         </span>
-        <h1 className="mt-5 text-2xl font-extrabold text-slate-900 sm:text-3xl">
+        <h1 className="mt-5 text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-slate-100">
           Payment Not Completed
         </h1>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted sm:text-base">
@@ -41,7 +41,7 @@ export default async function PaymentCancelledPage({
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl border border-border-soft px-6 py-3 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary"
+            className="inline-flex items-center gap-2 rounded-xl border border-border-soft px-6 py-3 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary dark:border-white/10 dark:text-slate-300"
           >
             Contact Support
           </Link>

@@ -3,17 +3,16 @@
 import { useCurrency } from "@/components/currency-provider";
 import type { CurrencyCode } from "@/lib/site-types";
 
-export function CurrencyToggle() {
+export function CurrencyToggle({ currencies }: { currencies: CurrencyCode[] }) {
   const { currency, setCurrency } = useCurrency();
-  const options: CurrencyCode[] = ["BDT", "USD"];
 
   return (
     <div
-      className="inline-flex rounded-xl border border-border-soft bg-white p-1"
+      className="inline-flex rounded-xl border border-border-soft bg-white p-1 dark:border-white/10 dark:bg-ink"
       role="group"
       aria-label="Select currency"
     >
-      {options.map((option) => (
+      {currencies.map((option) => (
         <button
           key={option}
           type="button"

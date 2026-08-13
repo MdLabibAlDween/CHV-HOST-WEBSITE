@@ -28,13 +28,13 @@ export default async function BdixVpsPage() {
         crumb="BDIX VPS"
       />
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <CategoryPricing plans={categoryPlans} />
         </div>
       </section>
 
-      <section className="border-y border-border-soft bg-slate-50 py-16">
+      <section className="border-y border-border-soft bg-slate-50 py-16 dark:border-white/10 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Why BDIX VPS"
@@ -53,9 +53,9 @@ export default async function BdixVpsPage() {
         </div>
       </section>
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-border-soft bg-gradient-to-br from-slate-50 to-white p-8 shadow-sm sm:p-10">
+          <div className="rounded-3xl border border-border-soft bg-gradient-to-br from-slate-50 to-white p-8 shadow-sm sm:p-10 dark:border-white/10 dark:from-white/5 dark:to-transparent">
             <SectionHeading
               align="left"
               eyebrow="Ideal for"
@@ -68,7 +68,7 @@ export default async function BdixVpsPage() {
                 "Apps and services targeting national users",
                 "Agencies running client projects in Bangladesh",
               ].map((item) => (
-                <p key={item} className="flex items-start gap-2.5 text-sm text-slate-700">
+                <p key={item} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                   <span className="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full btn-gradient" aria-hidden="true" />
                   {item}
                 </p>
@@ -82,7 +82,7 @@ export default async function BdixVpsPage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-16">
+      <section className="bg-slate-50 py-16 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="FAQ" title="BDIX VPS questions" />
           <div className="mt-10">

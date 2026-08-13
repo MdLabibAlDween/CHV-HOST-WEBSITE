@@ -28,13 +28,13 @@ export default async function HostingPage() {
         crumb="Web Hosting"
       />
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <CategoryPricing plans={categoryPlans} />
         </div>
       </section>
 
-      <section className="border-y border-border-soft bg-slate-50 py-16">
+      <section className="border-y border-border-soft bg-slate-50 py-16 dark:border-white/10 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Included in every plan"
@@ -53,7 +53,7 @@ export default async function HostingPage() {
         </div>
       </section>
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="FAQ" title="Web hosting questions" />
           <div className="mt-10">

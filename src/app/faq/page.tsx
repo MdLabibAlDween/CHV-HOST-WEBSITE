@@ -24,7 +24,7 @@ export default function FaqPage() {
         crumb="FAQ"
       />
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FAQAccordion items={content.faqs} />
           <div className="mt-10 flex flex-col items-center justify-center gap-3 text-center">
@@ -41,7 +41,7 @@ export default function FaqPage() {
               </a>
               <a
                 href={`mailto:${env.supportEmail}`}
-                className="inline-flex items-center gap-2 rounded-xl border border-border-soft px-6 py-3 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-xl border border-border-soft px-6 py-3 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary dark:border-white/10 dark:text-slate-300"
               >
                 <Icon name="mail" size={16} />
                 Email Us

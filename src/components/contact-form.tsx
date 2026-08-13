@@ -34,23 +34,23 @@ export function ContactForm() {
   };
 
   const inputClass =
-    "h-11 w-full rounded-xl border border-border-soft bg-white px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30";
-  const labelClass = "block text-sm font-semibold text-slate-700";
+    "h-11 w-full rounded-xl border border-border-soft bg-card px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-white/10 dark:text-slate-100 dark:placeholder:text-slate-500";
+  const labelClass = "block text-sm font-semibold text-slate-700 dark:text-slate-300";
 
   if (status === "ok") {
     return (
-      <div className="flex h-full flex-col items-center justify-center rounded-3xl border border-emerald-200 bg-emerald-50 p-10 text-center">
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white text-emerald-500">
+      <div className="flex h-full flex-col items-center justify-center rounded-3xl border border-emerald-200 bg-emerald-50 p-10 text-center dark:border-emerald-500/30 dark:bg-emerald-500/10">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white text-emerald-500 dark:bg-white/10">
           <Icon name="check-circle" size={28} />
         </span>
-        <h2 className="mt-4 text-xl font-extrabold text-slate-900">Message sent!</h2>
-        <p className="mt-2 max-w-sm text-sm text-slate-600">
+        <h2 className="mt-4 text-xl font-extrabold text-slate-900 dark:text-slate-100">Message sent!</h2>
+        <p className="mt-2 max-w-sm text-sm text-slate-600 dark:text-slate-400">
           Thanks for reaching out. Our team will get back to you within a few hours.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-6 rounded-xl border border-emerald-300 px-5 py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-100"
+          className="mt-6 rounded-xl border border-emerald-300 px-5 py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-100 dark:border-emerald-500/40 dark:text-emerald-400 dark:hover:bg-emerald-500/10"
         >
           Send another message
         </button>
@@ -92,7 +92,7 @@ export function ContactForm() {
         <label htmlFor="contact-message" className={labelClass}>
           Message <span className="text-rose-500">*</span>
         </label>
-        <textarea id="contact-message" required rows={6} value={form.message} onChange={update("message")} className="mt-1.5 w-full rounded-xl border border-border-soft bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30" />
+        <textarea id="contact-message" required rows={6} value={form.message} onChange={update("message")} className="mt-1.5 w-full rounded-xl border border-border-soft bg-card px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-white/10 dark:text-slate-100 dark:placeholder:text-slate-500" />
       </div>
 
       {status === "error" && (

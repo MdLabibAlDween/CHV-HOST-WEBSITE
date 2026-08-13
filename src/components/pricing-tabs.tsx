@@ -33,7 +33,7 @@ export function PricingTabs({ categories }: { categories: CategoryTab[] }) {
             className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors ${
               active === tab.id
                 ? "btn-gradient text-white"
-                : "border border-border-soft bg-white text-slate-600 hover:border-primary/40 hover:text-primary"
+                : "border border-border-soft bg-white text-slate-600 hover:border-primary/40 hover:text-primary dark:border-white/10 dark:bg-ink dark:text-slate-400"
             }`}
           >
             {tab.label}

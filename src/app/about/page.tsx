@@ -25,7 +25,7 @@ export default function AboutPage() {
         crumb="About"
       />
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
@@ -55,7 +55,7 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {content.stats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-border-soft bg-slate-50 p-6 text-center">
+                <div key={stat.label} className="rounded-2xl border border-border-soft bg-slate-50 p-6 text-center dark:border-white/10 dark:bg-white/5">
                   <p className="gradient-text text-3xl font-extrabold">{stat.value}{stat.suffix}</p>
                   <p className="mt-1.5 text-xs font-medium uppercase tracking-wider text-muted">{stat.label}</p>
                 </div>
@@ -65,7 +65,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-border-soft bg-slate-50 py-16">
+      <section className="border-t border-border-soft bg-slate-50 py-16 dark:border-white/10 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Our values" title="What we stand for" />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

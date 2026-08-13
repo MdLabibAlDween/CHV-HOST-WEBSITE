@@ -24,15 +24,15 @@ export function ComparisonTable({
   return (
     <div>
       {/* Desktop table */}
-      <div className="hidden overflow-hidden rounded-2xl border border-border-soft bg-white shadow-sm lg:block">
+      <div className="hidden overflow-hidden rounded-2xl border border-border-soft bg-card shadow-sm lg:block dark:border-white/10">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="border-b border-border-soft bg-slate-50">
-              <th scope="col" className="px-5 py-4 text-left font-semibold text-slate-700">
+            <tr className="border-b border-border-soft bg-slate-50 dark:border-white/10 dark:bg-white/5">
+              <th scope="col" className="px-5 py-4 text-left font-semibold text-slate-700 dark:text-slate-300">
                 Features
               </th>
               {plans.map((plan) => (
-                <th key={plan.id} scope="col" className="px-5 py-4 text-left font-bold text-slate-900">
+                <th key={plan.id} scope="col" className="px-5 py-4 text-left font-bold text-slate-900 dark:text-slate-100">
                   <span className="flex items-center gap-2">
                     {plan.name}
                     {plan.popular && (
@@ -46,8 +46,8 @@ export function ComparisonTable({
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-border-soft">
-              <th scope="row" className="bg-slate-50/50 px-5 py-3 text-left font-semibold text-slate-700">
+            <tr className="border-b border-border-soft dark:border-white/10">
+              <th scope="row" className="bg-slate-50/50 px-5 py-3 text-left font-semibold text-slate-700 dark:bg-white/5 dark:text-slate-300">
                 Price ({currency})
               </th>
               {plans.map((plan) => {
@@ -60,19 +60,19 @@ export function ComparisonTable({
               })}
             </tr>
             {allSpecs.map((label) => (
-              <tr key={label} className="border-b border-border-soft last:border-0">
-                <th scope="row" className="bg-slate-50/50 px-5 py-3 text-left font-medium text-slate-600">
+              <tr key={label} className="border-b border-border-soft last:border-0 dark:border-white/10">
+                <th scope="row" className="bg-slate-50/50 px-5 py-3 text-left font-medium text-slate-600 dark:bg-white/5 dark:text-slate-400">
                   {label}
                 </th>
                 {plans.map((plan) => (
-                  <td key={plan.id} className="px-5 py-3 text-slate-700">
+                  <td key={plan.id} className="px-5 py-3 text-slate-700 dark:text-slate-300">
                     {rowValue(plan, label)}
                   </td>
                 ))}
               </tr>
             ))}
             <tr>
-              <th scope="row" className="bg-slate-50/50 px-5 py-4" />
+              <th scope="row" className="bg-slate-50/50 px-5 py-4 dark:bg-white/5" />
               {plans.map((plan) => (
                 <td key={plan.id} className="px-5 py-4">
                   <a
@@ -98,12 +98,12 @@ export function ComparisonTable({
           return (
             <div
               key={plan.id}
-              className={`rounded-2xl border bg-white p-5 shadow-sm ${
-                plan.popular ? "border-primary/50 ring-1 ring-primary/20" : "border-border-soft"
+              className={`rounded-2xl border bg-card p-5 shadow-sm ${
+                plan.popular ? "border-primary/50 ring-1 ring-primary/20" : "border-border-soft dark:border-white/10"
               }`}
             >
               <div className="flex items-center justify-between">
-                <h3 className="font-bold text-slate-900">{plan.name}</h3>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100">{plan.name}</h3>
                 {plan.popular && (
                   <span className="rounded-full btn-gradient px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
                     Popular
@@ -117,7 +117,7 @@ export function ComparisonTable({
                 {allSpecs.map((label) => (
                   <div key={label} className="flex items-center justify-between gap-3 text-sm">
                     <dt className="text-muted">{label}</dt>
-                    <dd className="text-right font-semibold text-slate-800">{rowValue(plan, label)}</dd>
+                    <dd className="text-right font-semibold text-slate-800 dark:text-slate-200">{rowValue(plan, label)}</dd>
                   </div>
                 ))}
               </dl>

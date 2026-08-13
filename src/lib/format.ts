@@ -1,4 +1,4 @@
-import type { BillingCycle, CurrencyCode } from "@/lib/site-types";
+import type { BillingCycle, CurrencyCode, HostingPlan } from "@/lib/site-types";
 
 /** WHMCS-style billing cycle keys. */
 export const BILLING_CYCLES: BillingCycle[] = [
@@ -86,4 +86,11 @@ export function cycleMonths(cycle: BillingCycle): number {
 /** Effective monthly price for a cycle (used for "save X%" hints). */
 export function effectiveMonthly(amount: number, cycle: BillingCycle): number {
   return amount / cycleMonths(cycle);
+}
+
+/** Currencies that actually have prices in the given plans (data-driven BDT/USD toggle). */
+export function availableCurrencies(plans: HostingPlan[]): CurrencyCode[] {
+  const has = (code: CurrencyCode) =>
+    plans.some((p) => p.billingCycles.some((c) => p.prices[priceKey(code)][c] !== undefined));
+  return (["BDT", "USD"] as CurrencyCode[]).filter(has);
 }

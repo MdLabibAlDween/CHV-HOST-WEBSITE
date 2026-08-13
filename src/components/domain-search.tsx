@@ -101,7 +101,7 @@ export function DomainSearch({ compact = false }: { compact?: boolean }) {
             placeholder="yourdomain.com"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="h-14 w-full rounded-xl border border-border-soft bg-white pl-12 pr-4 text-base text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="h-14 w-full rounded-xl border border-border-soft bg-card pl-12 pr-4 text-base text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-white/10 dark:text-slate-100 dark:placeholder:text-slate-500"
           />
         </div>
         <button
@@ -123,14 +123,14 @@ export function DomainSearch({ compact = false }: { compact?: boolean }) {
         </button>
       </form>
 
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500">
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
         <span className="font-semibold">Popular:</span>
         {POPULAR_TLDS.map((tld) => (
           <button
             key={tld}
             type="button"
             onClick={() => setQuery((q) => q.split(".")[0] + tld)}
-            className="rounded-full border border-border-soft bg-white px-3 py-1 font-medium transition-colors hover:border-primary/40 hover:text-primary"
+            className="rounded-full border border-border-soft bg-card px-3 py-1 font-medium transition-colors hover:border-primary/40 hover:text-primary dark:border-white/10"
           >
             {tld}
           </button>
@@ -155,8 +155,8 @@ export function DomainSearch({ compact = false }: { compact?: boolean }) {
       )}
 
       {results && results.length > 0 && (
-        <div className="mt-6 overflow-hidden rounded-2xl border border-border-soft bg-white">
-          <div className="border-b border-border-soft bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-700">
+        <div className="mt-6 overflow-hidden rounded-2xl border border-border-soft bg-card dark:border-white/10">
+          <div className="border-b border-border-soft bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
             Results for <span className="text-primary">{searched}</span>
           </div>
           <ul className="divide-y divide-border-soft">
@@ -167,7 +167,7 @@ export function DomainSearch({ compact = false }: { compact?: boolean }) {
               return (
                 <li key={key} className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-sm font-bold text-slate-900">
+                    <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
                       {result.domain}
                       <span className="text-primary">{result.tld}</span>
                       {result.premium && (
@@ -235,8 +235,8 @@ export function DomainSearch({ compact = false }: { compact?: boolean }) {
           </ul>
 
           {cart.length > 0 && (
-            <div className="flex flex-col gap-3 border-t border-border-soft bg-slate-50 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-slate-700">
+            <div className="flex flex-col gap-3 border-t border-border-soft bg-slate-50 px-5 py-4 sm:flex-row sm:items-center sm:justify-between dark:border-white/10 dark:bg-white/5">
+              <p className="text-sm text-slate-700 dark:text-slate-300">
                 <span className="font-bold">{cart.length}</span> domain{cart.length > 1 ? "s" : ""} in
                 cart · Total{" "}
                 <span className="font-bold">

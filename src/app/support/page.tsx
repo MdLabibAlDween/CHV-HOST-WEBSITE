@@ -54,19 +54,19 @@ export default function SupportPage() {
         crumb="Support"
       />
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {channels.map((channel) => (
               <a
                 key={channel.title}
                 href={channel.href}
-                className="group rounded-2xl border border-border-soft bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-slate-900/5"
+                className="group rounded-2xl border border-border-soft bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-slate-900/5 dark:border-white/10 dark:hover:shadow-black/30"
               >
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl btn-gradient text-white">
                   <Icon name={channel.icon} size={22} />
                 </span>
-                <h2 className="mt-4 text-base font-bold text-slate-900">{channel.title}</h2>
+                <h2 className="mt-4 text-base font-bold text-slate-900 dark:text-slate-100">{channel.title}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{channel.description}</p>
                 <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                   {channel.cta}
@@ -78,9 +78,9 @@ export default function SupportPage() {
         </div>
       </section>
 
-      <section className="border-t border-border-soft bg-slate-50 py-16">
+      <section className="border-t border-border-soft bg-slate-50 py-16 dark:border-white/10 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-2xl font-extrabold text-slate-900 sm:text-3xl">
+          <h2 className="text-center text-2xl font-extrabold text-slate-900 sm:text-3xl dark:text-slate-100">
             Common questions
           </h2>
           <div className="mt-10">

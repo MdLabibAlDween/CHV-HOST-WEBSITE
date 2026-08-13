@@ -31,13 +31,13 @@ export default async function VpsPage() {
         crumb="VPS"
       />
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <CategoryPricing plans={categoryPlans} />
         </div>
       </section>
 
-      <section className="border-y border-border-soft bg-slate-50 py-16">
+      <section className="border-y border-border-soft bg-slate-50 py-16 dark:border-white/10 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Specifications"
@@ -56,16 +56,16 @@ export default async function VpsPage() {
         </div>
       </section>
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 dark:bg-transparent">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
-          <div className="rounded-3xl border border-border-soft bg-gradient-to-br from-slate-50 to-white p-8 shadow-sm sm:p-10">
-            <h2 className="flex items-center gap-2 text-xl font-extrabold text-slate-900">
+          <div className="rounded-3xl border border-border-soft bg-gradient-to-br from-slate-50 to-white p-8 shadow-sm sm:p-10 dark:border-white/10 dark:from-white/5 dark:to-transparent">
+            <h2 className="flex items-center gap-2 text-xl font-extrabold text-slate-900 dark:text-slate-100">
               <Icon name="check-circle" size={22} className="text-primary" />
               OS &amp; control panel choices
             </h2>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {OS_CHOICES.map((os) => (
-                <li key={os} className="flex items-center gap-2.5 rounded-xl border border-border-soft bg-white px-4 py-3 text-sm font-medium text-slate-700">
+                <li key={os} className="flex items-center gap-2.5 rounded-xl border border-border-soft bg-card px-4 py-3 text-sm font-medium text-slate-700 dark:border-white/10 dark:text-slate-300">
                   <Icon name="check" size={16} className="text-emerald-500" />
                   {os}
                 </li>
@@ -80,7 +80,7 @@ export default async function VpsPage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-16">
+      <section className="bg-slate-50 py-16 dark:bg-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="FAQ" title="VPS questions" />
           <div className="mt-10">

@@ -18,7 +18,7 @@ export function FAQAccordion({ items }: { items: FaqItem[] }) {
         return (
           <div
             key={item.question}
-            className="overflow-hidden rounded-2xl border border-border-soft bg-white"
+            className="overflow-hidden rounded-2xl border border-border-soft bg-card dark:border-white/10"
           >
             <button
               type="button"
@@ -28,7 +28,7 @@ export function FAQAccordion({ items }: { items: FaqItem[] }) {
               id={`faq-button-${index}`}
               onClick={() => setOpenIndex(open ? null : index)}
             >
-              <span className="text-sm font-semibold text-slate-900 sm:text-base">{item.question}</span>
+              <span className="text-sm font-semibold text-slate-900 sm:text-base dark:text-slate-100">{item.question}</span>
               <Icon
                 name={open ? "minus" : "plus"}
                 size={18}
