@@ -32,7 +32,7 @@ export default function ClientAreaPage() {
         crumb="Client Area"
       />
 
-      <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
+      <section className="bg-white pb-16 pt-4 sm:pb-20 sm:pt-6 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {base ? (
             <div className="mx-auto max-w-3xl rounded-3xl border border-border-soft bg-card p-8 text-center shadow-sm sm:p-12 dark:border-white/10">
