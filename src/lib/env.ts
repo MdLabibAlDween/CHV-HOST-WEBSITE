@@ -31,6 +31,7 @@ export type Env = {
   whmcsAccessKey: string;
   useWhmcsProducts: boolean;
   whmcsTimeoutMs: number;
+  whmcsCacheTtlMs: number;
 
   whmHost: string;
   whmUsername: string;
@@ -112,6 +113,7 @@ const cached: Env = {
   whmcsAccessKey: str("WHMCS_ACCESS_KEY"),
   useWhmcsProducts: bool("USE_WHMCS_PRODUCTS", false),
   whmcsTimeoutMs: num("WHMCS_TIMEOUT_MS", 8000),
+  whmcsCacheTtlMs: num("WHMCS_CACHE_TTL_MS", 120000),
 
   whmHost: str("WHM_HOST"),
   whmUsername: str("WHM_USERNAME"),
