@@ -1,14 +1,17 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /*
  * CHV HOST design tokens.
  * Brand colors are injected at runtime from .env (PRIMARY_COLOR /
  * SECONDARY_COLOR) via the root layout; defaults below.
  */
 @theme inline {
-  --color-background: #ffffff;
-  --color-foreground: #0b1220;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
   --color-surface: #ffffff;
+  --color-card: var(--card, #ffffff);
   --color-muted: #64748b;
   --color-border-soft: #e2e8f0;
 
@@ -25,11 +28,18 @@
 :root {
   --background: #ffffff;
   --foreground: #0b1220;
+  --card: #ffffff;
 
   /* Brand colors (configurable via NEXT_PUBLIC_PRIMARY_COLOR /
      NEXT_PUBLIC_SECONDARY_COLOR — inlined at build time). */
   --brand-primary: #4f46e5;
   --brand-secondary: #06b6d4;
+}
+
+.dark {
+  --background: #0b1220;
+  --foreground: #e2e8f0;
+  --card: #111a2c;
 }
 
 body {

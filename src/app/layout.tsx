@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { CurrencyProvider } from "@/components/currency-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { getPublicEnv } from "@/lib/env";
 
 const geistSans = Geist({
@@ -72,18 +73,20 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <CurrencyProvider>
-          <Header />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </CurrencyProvider>
+        <ThemeProvider>
+          <CurrencyProvider>
+            <Header />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </CurrencyProvider>
+        </ThemeProvider>
 
         {env.gaId && (
           <>
