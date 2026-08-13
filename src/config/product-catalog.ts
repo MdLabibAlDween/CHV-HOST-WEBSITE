@@ -12,7 +12,7 @@ export const defaultPlans: HostingPlan[] = [
   /* ------------------------------ Web Hosting ----------------------------- */
   {
     id: "web-starter",
-    category: "web",
+    category: "bdix",
     name: "Starter",
     tagline: "Perfect for a first website or blog.",
     whmcsPid: 1,
@@ -40,7 +40,7 @@ export const defaultPlans: HostingPlan[] = [
   },
   {
     id: "web-business",
-    category: "web",
+    category: "bdix",
     name: "Business",
     tagline: "Our most popular plan for growing sites.",
     popular: true,
@@ -70,7 +70,7 @@ export const defaultPlans: HostingPlan[] = [
   },
   {
     id: "web-professional",
-    category: "web",
+    category: "bdix",
     name: "Professional",
     tagline: "For online stores and business sites.",
     whmcsPid: 3,
@@ -99,7 +99,7 @@ export const defaultPlans: HostingPlan[] = [
   },
   {
     id: "web-enterprise",
-    category: "web",
+    category: "bdix",
     name: "Enterprise",
     tagline: "Maximum resources for demanding projects.",
     whmcsPid: 4,
@@ -217,7 +217,7 @@ export const defaultPlans: HostingPlan[] = [
   /* ----------------------------- Turbo Hosting ---------------------------- */
   {
     id: "turbo-start",
-    category: "turbo",
+    category: "bdix",
     name: "Turbo Start",
     tagline: "Performance shared hosting to start.",
     whmcsPid: 21,
@@ -246,7 +246,7 @@ export const defaultPlans: HostingPlan[] = [
   },
   {
     id: "turbo-pro",
-    category: "turbo",
+    category: "bdix",
     name: "Turbo Pro",
     tagline: "Serious speed for serious sites.",
     popular: true,
@@ -276,7 +276,7 @@ export const defaultPlans: HostingPlan[] = [
   },
   {
     id: "turbo-max",
-    category: "turbo",
+    category: "bdix",
     name: "Turbo Max",
     tagline: "The fastest shared hosting we offer.",
     whmcsPid: 23,
@@ -394,7 +394,7 @@ export const defaultPlans: HostingPlan[] = [
   /* ---------------------------------- VPS --------------------------------- */
   {
     id: "vps-v1",
-    category: "vps",
+    category: "bdix-vps",
     name: "V1",
     tagline: "Entry-level VPS for small projects.",
     whmcsPid: 41,
@@ -423,7 +423,7 @@ export const defaultPlans: HostingPlan[] = [
   },
   {
     id: "vps-v2",
-    category: "vps",
+    category: "bdix-vps",
     name: "V2",
     tagline: "Balanced performance for websites.",
     popular: true,
@@ -453,7 +453,7 @@ export const defaultPlans: HostingPlan[] = [
   },
   {
     id: "vps-v4",
-    category: "vps",
+    category: "bdix-vps",
     name: "V4",
     tagline: "For resource-hungry applications.",
     whmcsPid: 43,
@@ -482,7 +482,7 @@ export const defaultPlans: HostingPlan[] = [
   },
   {
     id: "vps-v8",
-    category: "vps",
+    category: "bdix-vps",
     name: "V8",
     tagline: "High-performance for production workloads.",
     whmcsPid: 44,

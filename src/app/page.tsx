@@ -41,7 +41,7 @@ const WHY_ICONS: Record<string, IconName> = {
 export default async function HomePage() {
   const content = loadSiteContent();
   const { plans } = await fetchPlans();
-  const featured = plansByCategory(plans, "web").slice(0, 4);
+  const featured = plansByCategory(plans, "bdix").slice(0, 4);
 
   return (
     <>

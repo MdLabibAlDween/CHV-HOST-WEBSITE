@@ -1,5 +1,5 @@
 import type { HostingPlan, BillingCycle, CurrencyCode } from "@/lib/site-types";
-import { formatMoney, priceKey } from "@/lib/format";
+import { formatMoney, priceKey, cyclePerLabel } from "@/lib/format";
 import { Icon } from "@/components/icons";
 import { orderHref } from "@/lib/order";
 
@@ -54,7 +54,7 @@ export function ComparisonTable({
                 const price = plan.prices[priceKey(currency)][cycle];
                 return (
                   <td key={plan.id} className="px-5 py-3 font-bold text-primary">
-                    {price !== undefined ? `${formatMoney(price, currency)}/${cycle}` : "Contact us"}
+                    {price !== undefined ? `${formatMoney(price, currency)} ${cyclePerLabel(cycle)}` : "Contact us"}
                   </td>
                 );
               })}
@@ -111,7 +111,7 @@ export function ComparisonTable({
                 )}
               </div>
               <p className="mt-1 text-sm text-primary">
-                {price !== undefined ? `${formatMoney(price, currency)}/${cycle}` : "Contact us"}
+                {price !== undefined ? `${formatMoney(price, currency)} ${cyclePerLabel(cycle)}` : "Contact us"}
               </p>
               <dl className="mt-4 space-y-2.5">
                 {allSpecs.map((label) => (

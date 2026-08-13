@@ -12,21 +12,30 @@ const NAV = [
   { label: "Home", href: "/" },
   {
     label: "Hosting",
-    href: "/hosting",
+    href: "/bdix-hosting",
     children: [
-      { label: "Web Hosting", href: "/hosting" },
       { label: "BDIX Hosting", href: "/bdix-hosting" },
-      { label: "Turbo Hosting", href: "/turbo-hosting" },
+      { label: "WordPress Hosting", href: "/wordpress-hosting" },
       { label: "Reseller Hosting", href: "/reseller-hosting" },
     ],
   },
   { label: "Domains", href: "/domains" },
   {
-    label: "VPS",
-    href: "/vps",
+    label: "VPS & RDP",
+    href: "/bdix-vps",
     children: [
-      { label: "VPS", href: "/vps" },
-      { label: "BDIX VPS", href: "/bdix-vps" },
+      { label: "BDIX VPS / RDP", href: "/bdix-vps" },
+      { label: "Windows Server RDP", href: "/windows-rdp" },
+      { label: "Managed VPS", href: "/managed-vps" },
+    ],
+  },
+  {
+    label: "Servers",
+    href: "/dedicated-server",
+    children: [
+      { label: "Dedicated Server", href: "/dedicated-server" },
+      { label: "IVAC Service", href: "/ivac" },
+      { label: "License", href: "/license" },
     ],
   },
   { label: "Pricing", href: "/pricing" },

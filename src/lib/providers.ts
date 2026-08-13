@@ -1,8 +1,9 @@
-import type { BillingCycle, HostingPlan, PlanCategory } from "@/lib/site-types";
+import type { BillingCycle, HostingPlan, PlanCategory, PriceEntry } from "@/lib/site-types";
 import { loadPlans } from "@/lib/site-config";
 import { whmcsRequest } from "@/lib/whmcs";
 import { getEnv } from "@/lib/env";
 import { log } from "@/lib/logger";
+import { WHMCS_GROUP_MAP, WHMCS_GID_MAP, FALLBACK_CATEGORY } from "@/config/whmcs-groups";
 
 /**
  * Unified product/pricing provider.
@@ -10,8 +11,14 @@ import { log } from "@/lib/logger";
  * When WHMCS is configured (USE_WHMCS_PRODUCTS=true and credentials
  * present), products are fetched from WHMCS and are the source of
  * truth for names, prices, currencies and billing cycles. Marketing
- * extras (features, badges, descriptions, icons, order URLs) come from
- * the local catalog, merged by WHMCS product id.
+ * extras (badges, "Most Popular", order URLs) come from the local
+ * catalog, merged by WHMCS product id — but only when the WHMCS
+ * product has no spec list of its own.
+ *
+ * WHMCS GetProducts (JSON) returns products as an array under
+ * `products.product`, with pricing keyed by currency code (BDT/USD),
+ * each containing per-cycle prices. A cycle value of -1.00 means the
+ * cycle is not enabled; 0.00 is a free (or unset) price.
  *
  * Responses are cached for WHMCS_CACHE_TTL_MS (default 120s). When the
  * API is unreachable or the response cannot be parsed, the local
@@ -19,17 +26,6 @@ import { log } from "@/lib/logger";
  * zero products yields an empty plan list so the UI can show a "plans
  * coming soon" state instead of fabricated prices.
  */
-
-const CATEGORY_BY_GROUP: Record<string, PlanCategory> = {
-  "Web Hosting": "web",
-  "Shared Hosting": "web",
-  Hosting: "web",
-  "BDIX Hosting": "bdix",
-  "Turbo Hosting": "turbo",
-  "Reseller Hosting": "reseller",
-  VPS: "vps",
-  "BDIX VPS": "bdix-vps",
-};
 
 const CYCLE_KEYS: BillingCycle[] = [
   "monthly",
@@ -46,16 +42,49 @@ function normalizeName(name: string): string {
 
 function categoryForGroup(group: string): PlanCategory {
   const normalized = normalizeName(group);
-  for (const [key, category] of Object.entries(CATEGORY_BY_GROUP)) {
+  for (const [key, category] of Object.entries(WHMCS_GROUP_MAP)) {
     if (normalizeName(key) === normalized) return category;
   }
-  return "web";
+  return FALLBACK_CATEGORY;
 }
 
-function toPrice(value: unknown): number | undefined {
-  if (typeof value !== "string" || value.trim() === "") return undefined;
-  const n = Number(value);
-  return Number.isFinite(n) ? n : undefined;
+/** Resolve a product's category: explicit gid map first, then groupname, then fallback. */
+function categoryForProduct(p: Record<string, unknown>): PlanCategory {
+  const gid = typeof p.gid === "string" ? p.gid : String(p.gid ?? "");
+  if (gid && WHMCS_GID_MAP[gid]) return WHMCS_GID_MAP[gid];
+  if (typeof p.groupname === "string" && p.groupname) return categoryForGroup(p.groupname);
+  return FALLBACK_CATEGORY;
+}
+
+/** Split a WHMCS product description (newline-separated spec list) into card features. */
+function descriptionLines(desc: unknown): string[] {
+  if (typeof desc !== "string") return [];
+  return desc
+    .split(/\r?\n/)
+    .map((line) => line.trim().replace(/\s+/g, " "))
+    .filter(Boolean)
+    .slice(0, 14);
+}
+
+/** Extract per-currency, per-cycle prices. -1.00 = cycle disabled. */
+function currencyPricing(pricingRaw: unknown): { prices: PriceEntry; cycles: BillingCycle[] } {
+  const prices: PriceEntry = { bdt: {}, usd: {} };
+  const cycles = new Set<BillingCycle>();
+  if (!pricingRaw || typeof pricingRaw !== "object") return { prices, cycles: [] };
+
+  for (const [code, entry] of Object.entries(pricingRaw as Record<string, Record<string, unknown>>)) {
+    const key = code.toUpperCase() === "USD" ? "usd" : code.toUpperCase() === "BDT" ? "bdt" : null;
+    if (!key || !entry || typeof entry !== "object") continue;
+    for (const cycle of CYCLE_KEYS) {
+      const raw = (entry as Record<string, unknown>)[cycle];
+      if (typeof raw !== "string" || raw.trim() === "") continue;
+      const n = Number(raw);
+      if (!Number.isFinite(n) || n < 0) continue;
+      prices[key][cycle] = n;
+      cycles.add(cycle);
+    }
+  }
+  return { prices, cycles: [...cycles] };
 }
 
 /**
@@ -64,48 +93,46 @@ function toPrice(value: unknown): number | undefined {
  * Returns null on parse failure; an empty array means "no products yet".
  */
 function mapWhmcsProducts(raw: Record<string, unknown>): HostingPlan[] | null {
-  const products = raw.products as Record<string, Record<string, unknown>> | undefined;
-  if (!products || typeof products !== "object") {
+  const products = raw.products;
+  let items: unknown[] | null = null;
+  if (Array.isArray(products)) {
+    items = products;
+  } else if (products && typeof products === "object") {
+    const arr = (products as { product?: unknown }).product;
+    if (Array.isArray(arr)) items = arr;
+  }
+
+  if (!items) {
     const total = raw.totalresults;
     if (total === "0" || total === 0) return [];
     return null;
   }
 
   const plans: HostingPlan[] = [];
+  for (const item of items) {
+    if (!item || typeof item !== "object") continue;
+    const p = item as Record<string, unknown>;
+    const pid = typeof p.pid === "string" ? p.pid : String(p.pid ?? "");
+    if (!pid) continue;
 
-  for (const [pid, product] of Object.entries(products)) {
-    if (!product || typeof product !== "object") continue;
-    const name = typeof product.name === "string" ? product.name : `Plan ${pid}`;
-    const group = typeof product.groupname === "string" ? product.groupname : "";
-    const category = categoryForGroup(group);
+    const name = typeof p.name === "string" && p.name.trim() ? p.name.trim() : `Plan ${pid}`;
+    const specLines = descriptionLines(p.description);
+    const { prices, cycles } = currencyPricing(p.pricing);
 
-    const pricingRaw = product.pricing as Record<string, Record<string, unknown>> | undefined;
-    const prices: HostingPlan["prices"] = { bdt: {}, usd: {} };
-    if (pricingRaw && typeof pricingRaw === "object") {
-      for (const cycle of CYCLE_KEYS) {
-        const entry = pricingRaw[cycle];
-        if (!entry || typeof entry !== "object") continue;
-        const bdtPrice = toPrice(entry.bdt);
-        const usdPrice = toPrice(entry.usd);
-        if (bdtPrice !== undefined) prices.bdt[cycle] = bdtPrice;
-        if (usdPrice !== undefined) prices.usd[cycle] = usdPrice;
-      }
+    if (cycles.length === 0) {
+      log("WHMCS_RESPONSE", { note: `Product "${name}" (pid ${pid}) has no enabled billing cycle; hidden until a price is set.` });
+      continue;
     }
-
-    const billingCycles = CYCLE_KEYS.filter(
-      (c) => prices.bdt[c] !== undefined || prices.usd[c] !== undefined,
-    );
-    if (billingCycles.length === 0) continue;
 
     plans.push({
       id: `whmcs-${pid}`,
-      category,
+      category: categoryForProduct(p),
       name,
-      tagline: typeof product.description === "string" ? product.description.slice(0, 120) : "",
+      tagline: specLines[0] ?? "",
       whmcsPid: Number(pid),
-      billingCycles,
+      billingCycles: cycles,
       prices,
-      features: [],
+      features: specLines,
       resourceSpecs: [],
     });
   }
@@ -113,24 +140,33 @@ function mapWhmcsProducts(raw: Record<string, unknown>): HostingPlan[] | null {
   return plans;
 }
 
-/** Merge catalog-only marketing fields (features, badges, icons, URLs) by whmcsPid. */
+/**
+ * Merge catalog-only marketing fields by whmcsPid — but only when the
+ * WHMCS product has no spec list of its own, so WHMCS specs are never
+ * replaced by stale catalog data.
+ */
 function mergeCatalogExtras(plans: HostingPlan[]): HostingPlan[] {
   const catalogByPid = new Map<number, HostingPlan>();
   for (const plan of loadPlans()) {
     if (plan.whmcsPid !== undefined) catalogByPid.set(plan.whmcsPid, plan);
   }
+
   return plans.map((plan) => {
     const local = plan.whmcsPid !== undefined ? catalogByPid.get(plan.whmcsPid) : undefined;
     if (!local) return plan;
-    return {
-      ...plan,
-      tagline: local.tagline || plan.tagline,
-      features: local.features,
-      resourceSpecs: local.resourceSpecs,
-      popular: local.popular,
-      badge: local.badge,
-      customOrderUrl: local.customOrderUrl,
-    };
+
+    if (plan.features.length < 2) {
+      return {
+        ...plan,
+        tagline: local.tagline || plan.tagline,
+        features: local.features,
+        resourceSpecs: local.resourceSpecs,
+        popular: local.popular,
+        badge: local.badge,
+        customOrderUrl: local.customOrderUrl,
+      };
+    }
+    return { ...plan, customOrderUrl: local.customOrderUrl };
   });
 }
 

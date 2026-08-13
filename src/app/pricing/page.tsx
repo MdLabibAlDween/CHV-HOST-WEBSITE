@@ -18,7 +18,7 @@ export default async function PricingPage() {
   const content = loadSiteContent();
   const { plans } = await fetchPlans();
 
-  const categories: PlanCategory[] = ["web", "bdix", "turbo", "reseller", "vps", "bdix-vps"];
+  const categories: PlanCategory[] = ["bdix", "wordpress", "reseller", "bdix-vps", "windows-rdp", "managed-vps", "ivac", "dedicated", "license"];
 
   return (
     <>

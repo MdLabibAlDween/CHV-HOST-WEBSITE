@@ -12,12 +12,15 @@ const SOCIAL_ICONS: Record<string, IconName> = {
 };
 
 const SERVICE_LINKS = [
-  { label: "Web Hosting", href: "/hosting" },
   { label: "BDIX Hosting", href: "/bdix-hosting" },
-  { label: "Turbo Hosting", href: "/turbo-hosting" },
+  { label: "WordPress Hosting", href: "/wordpress-hosting" },
   { label: "Reseller Hosting", href: "/reseller-hosting" },
-  { label: "VPS", href: "/vps" },
-  { label: "BDIX VPS", href: "/bdix-vps" },
+  { label: "BDIX VPS / RDP", href: "/bdix-vps" },
+  { label: "Windows Server RDP", href: "/windows-rdp" },
+  { label: "Managed VPS", href: "/managed-vps" },
+  { label: "Dedicated Server", href: "/dedicated-server" },
+  { label: "IVAC Service", href: "/ivac" },
+  { label: "License", href: "/license" },
 ];
 
 const DOMAIN_LINKS = [

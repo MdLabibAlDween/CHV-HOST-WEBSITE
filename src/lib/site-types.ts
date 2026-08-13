@@ -22,46 +22,64 @@ export const BILLING_CYCLE_LABELS: Record<BillingCycle, string> = {
 };
 
 export type PlanCategory =
-  | "web"
   | "bdix"
-  | "turbo"
+  | "wordpress"
   | "reseller"
-  | "vps"
-  | "bdix-vps";
+  | "bdix-vps"
+  | "windows-rdp"
+  | "managed-vps"
+  | "ivac"
+  | "dedicated"
+  | "license";
 
 export const CATEGORY_META: Record<
   PlanCategory,
   { label: string; href: string; description: string }
 > = {
-  web: {
-    label: "Web Hosting",
-    href: "/hosting",
-    description: "Reliable shared hosting with cPanel for every website.",
-  },
   bdix: {
     label: "BDIX Hosting",
     href: "/bdix-hosting",
-    description: "Bangladesh-optimized hosting over the BDIX network.",
+    description: "Bangladesh-optimized shared hosting over the local BDIX network.",
   },
-  turbo: {
-    label: "Turbo Hosting",
-    href: "/turbo-hosting",
-    description: "Maximum performance with NVMe and LiteSpeed.",
+  wordpress: {
+    label: "WordPress Hosting",
+    href: "/wordpress-hosting",
+    description: "Optimized WordPress hosting with LiteSpeed and one-click installs.",
   },
   reseller: {
     label: "Reseller Hosting",
     href: "/reseller-hosting",
     description: "White-label hosting with WHM and your own nameservers.",
   },
-  vps: {
-    label: "VPS",
-    href: "/vps",
-    description: "Root-access virtual servers with NVMe storage.",
-  },
   "bdix-vps": {
-    label: "BDIX VPS",
+    label: "BDIX VPS / RDP",
     href: "/bdix-vps",
-    description: "Low-latency VPS on the local BDIX network.",
+    description: "Low-latency VPS and RDP servers on the local BDIX network.",
+  },
+  "windows-rdp": {
+    label: "Windows Server RDP",
+    href: "/windows-rdp",
+    description: "Windows Server remote desktops for business and automation.",
+  },
+  "managed-vps": {
+    label: "Managed VPS",
+    href: "/managed-vps",
+    description: "Root-access VPS with server management handled by our team.",
+  },
+  ivac: {
+    label: "IVAC Service",
+    href: "/ivac",
+    description: "IVAC solutions for high-security remote desktop environments.",
+  },
+  dedicated: {
+    label: "Dedicated Server",
+    href: "/dedicated-server",
+    description: "Full bare-metal servers with NVMe storage and root access.",
+  },
+  license: {
+    label: "License",
+    href: "/license",
+    description: "Genuine software licenses — cPanel, Windows and more.",
   },
 };
 

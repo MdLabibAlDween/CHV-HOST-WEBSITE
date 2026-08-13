@@ -22,10 +22,10 @@ export default async function BdixVpsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="BDIX VPS"
-        title="Local VPS on the BDIX network"
-        subtitle="Full root-access servers with direct BDIX peering — sub-10ms latency for Bangladeshi users and applications."
-        crumb="BDIX VPS"
+        eyebrow="BDIX VPS / RDP"
+        title="Local VPS & RDP on the BDIX network"
+        subtitle="Full root-access servers and Windows RDP with direct BDIX peering — sub-10ms latency for Bangladeshi users and applications."
+        crumb="BDIX VPS / RDP"
       />
 
       <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
@@ -96,7 +96,7 @@ export default async function BdixVpsPage() {
         subtitle="BDIX VPS with root access, NVMe storage and support that speaks your language."
         primaryLabel="Deploy BDIX VPS"
         secondaryLabel="Compare VPS Plans"
-        secondaryHref="/vps"
+        secondaryHref="/contact"
       />
     </>
   );

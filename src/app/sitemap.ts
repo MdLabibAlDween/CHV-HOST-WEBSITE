@@ -3,12 +3,15 @@ import { getPublicEnv } from "@/lib/env";
 
 const STATIC_ROUTES = [
   "",
-  "/hosting",
   "/bdix-hosting",
-  "/turbo-hosting",
+  "/wordpress-hosting",
   "/reseller-hosting",
-  "/vps",
   "/bdix-vps",
+  "/windows-rdp",
+  "/managed-vps",
+  "/ivac",
+  "/dedicated-server",
+  "/license",
   "/domains",
   "/pricing",
   "/about",
