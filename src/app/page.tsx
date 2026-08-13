@@ -41,7 +41,7 @@ const WHY_ICONS: Record<string, IconName> = {
 export default async function HomePage() {
   const content = loadSiteContent();
   const { plans } = await fetchPlans();
-  const featured = plansByCategory(plans, "bdix").slice(0, 4);
+  const featured = plansByCategory(plans, "bdix");
 
   return (
     <>
@@ -155,7 +155,7 @@ export default async function HomePage() {
 
       {/* ------------------------------ Statistics ----------------------------- */}
       <section className="border-b border-border-soft bg-white dark:border-white/10 dark:bg-transparent" aria-label="Company statistics">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-12 sm:px-6 md:grid-cols-5 lg:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-12 last:col-span-2 sm:px-6 md:grid-cols-5 md:last:col-span-1 lg:px-8">
           {content.stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="gradient-text text-3xl font-extrabold tracking-tight sm:text-4xl">

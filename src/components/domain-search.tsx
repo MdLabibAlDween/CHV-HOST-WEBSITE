@@ -130,7 +130,7 @@ export function DomainSearch({ compact = false }: { compact?: boolean }) {
             key={tld}
             type="button"
             onClick={() => setQuery((q) => q.split(".")[0] + tld)}
-            className="rounded-full border border-border-soft bg-card px-3 py-1 font-medium transition-colors hover:border-primary/40 hover:text-primary dark:border-white/10"
+            className="rounded-full border border-border-soft bg-card px-3 py-2 text-xs font-medium transition-colors hover:border-primary/40 hover:text-primary dark:border-white/10"
           >
             {tld}
           </button>

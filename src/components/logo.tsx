@@ -31,7 +31,7 @@ export function Logo({ light = false, size = "md" }: { light?: boolean; size?: "
         {env.siteName}
       </span>
       <span
-        className={`font-medium ${size === "lg" ? "text-[11px]" : "text-[9px]"} uppercase tracking-[0.18em] text-muted`}
+        className={`hidden font-medium sm:block ${size === "lg" ? "text-[11px]" : "text-[9px]"} uppercase tracking-[0.18em] text-muted`}
         style={{ color: light ? "rgb(148 163 184)" : "#64748b" }}
       >
         {env.siteTagline}

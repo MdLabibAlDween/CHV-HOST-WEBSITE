@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/logo";
 import { Icon } from "@/components/icons";
 import { useEnv } from "@/lib/public-env";
@@ -17,6 +17,7 @@ const NAV = [
       { label: "BDIX Hosting", href: "/bdix-hosting" },
       { label: "WordPress Hosting", href: "/wordpress-hosting" },
       { label: "Reseller Hosting", href: "/reseller-hosting" },
+      { label: "License", href: "/license" },
     ],
   },
   { label: "Domains", href: "/domains" },
@@ -27,16 +28,13 @@ const NAV = [
       { label: "BDIX VPS / RDP", href: "/bdix-vps" },
       { label: "Windows Server RDP", href: "/windows-rdp" },
       { label: "Managed VPS", href: "/managed-vps" },
+      { label: "IVAC Service", href: "/ivac" },
     ],
   },
   {
     label: "Servers",
     href: "/dedicated-server",
-    children: [
-      { label: "Dedicated Server", href: "/dedicated-server" },
-      { label: "IVAC Service", href: "/ivac" },
-      { label: "License", href: "/license" },
-    ],
+    children: [{ label: "Dedicated Server", href: "/dedicated-server" }],
   },
   { label: "Pricing", href: "/pricing" },
   { label: "Support", href: "/support" },
@@ -44,25 +42,39 @@ const NAV = [
 
 function NavLink({
   item,
-  onNavigate,
+  index,
+  open,
+  onOpenChange,
 }: {
   item: (typeof NAV)[number];
-  onNavigate?: () => void;
+  index: number;
+  open: boolean;
+  onOpenChange: (index: number | null) => void;
 }) {
   const pathname = usePathname();
   const active = pathname === item.href || (item.children?.some((c) => pathname === c.href) ?? false);
-  const [open, setOpen] = useState(false);
 
   if (item.children) {
     return (
-      <li className="relative">
+      <li
+        className="relative"
+        onMouseEnter={() => onOpenChange(index)}
+        onMouseLeave={() => {
+          if (open) onOpenChange(null);
+        }}
+        onFocus={() => onOpenChange(index)}
+        onBlur={(e) => {
+          if (open && !e.currentTarget.contains(e.relatedTarget as Node)) onOpenChange(null);
+        }}
+      >
         <button
           type="button"
           className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
             active ? "text-primary" : "text-slate-700 hover:text-primary dark:text-slate-300"
           }`}
           aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
+          aria-haspopup="true"
+          onClick={() => onOpenChange(open ? null : index)}
         >
           {item.label}
           <Icon name="chevron-down" size={14} className={open ? "rotate-180" : ""} />
@@ -70,10 +82,7 @@ function NavLink({
         {open && (
           <ul
             className="absolute left-0 top-full z-50 mt-1 w-48 rounded-xl border border-border-soft bg-card p-1.5 shadow-lg shadow-slate-900/5 dark:border-white/10 dark:shadow-black/40"
-            onClick={() => {
-              setOpen(false);
-              onNavigate?.();
-            }}
+            onClick={() => onOpenChange(null)}
           >
             {item.children.map((child) => (
               <li key={child.href}>
@@ -95,7 +104,6 @@ function NavLink({
     <li>
       <Link
         href={item.href}
-        onClick={onNavigate}
         className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
           active ? "text-primary" : "text-slate-700 hover:text-primary dark:text-slate-300"
         }`}
@@ -109,8 +117,11 @@ function NavLink({
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openNav, setOpenNav] = useState<number | null>(null);
   const env = useEnv();
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
+  const desktopNavRef = useRef<HTMLDivElement>(null);
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   useEffect(() => {
@@ -119,6 +130,30 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setOpenNav(null);
+  }
+
+  useEffect(() => {
+    if (openNav === null) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (desktopNavRef.current && !desktopNavRef.current.contains(e.target as Node)) {
+        setOpenNav(null);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenNav(null);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [openNav]);
 
   const clientAreaUrl = "/client-area";
 
@@ -136,11 +171,19 @@ export function Header() {
         </Link>
 
         <nav aria-label="Main navigation" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
-            {NAV.map((item) => (
-              <NavLink key={item.label} item={item} />
-            ))}
-          </ul>
+          <div ref={desktopNavRef}>
+            <ul className="flex items-center gap-1">
+              {NAV.map((item, index) => (
+                <NavLink
+                  key={item.label}
+                  item={item}
+                  index={index}
+                  open={openNav === index}
+                  onOpenChange={setOpenNav}
+                />
+              ))}
+            </ul>
+          </div>
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
@@ -148,7 +191,7 @@ export function Header() {
             type="button"
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border-soft text-slate-700 transition-colors hover:border-primary/40 hover:text-primary dark:border-white/10 dark:text-slate-300 dark:hover:text-white"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-soft text-slate-700 transition-colors hover:border-primary/40 hover:text-primary dark:border-white/10 dark:text-slate-300 dark:hover:text-white"
           >
             <Icon name={theme === "dark" ? "sun" : "moon"} size={18} />
           </button>
@@ -172,13 +215,13 @@ export function Header() {
             type="button"
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border-soft text-slate-700 transition-colors hover:border-primary/40 hover:text-primary dark:border-white/10 dark:text-slate-300 dark:hover:text-white"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-soft text-slate-700 transition-colors hover:border-primary/40 hover:text-primary dark:border-white/10 dark:text-slate-300 dark:hover:text-white"
           >
             <Icon name={theme === "dark" ? "sun" : "moon"} size={18} />
           </button>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border-soft text-slate-700 lg:hidden dark:border-white/10 dark:text-slate-300"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-soft text-slate-700 lg:hidden dark:border-white/10 dark:text-slate-300"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close menu" : "Open menu"}

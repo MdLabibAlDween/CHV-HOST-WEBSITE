@@ -20,12 +20,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Missing domain query." }, { status: 400 });
   }
 
-  const { results, source } = await checkDomain(q, { tlds });
+  const { results, source, tldSource } = await checkDomain(q, { tlds });
 
   return NextResponse.json({
     query: q,
     results,
     source,
+    tldSource,
     note: source === "mock" ? "demo-mode" : "live",
   });
 }

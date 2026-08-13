@@ -15,12 +15,12 @@ const SERVICE_LINKS = [
   { label: "BDIX Hosting", href: "/bdix-hosting" },
   { label: "WordPress Hosting", href: "/wordpress-hosting" },
   { label: "Reseller Hosting", href: "/reseller-hosting" },
+  { label: "License", href: "/license" },
   { label: "BDIX VPS / RDP", href: "/bdix-vps" },
   { label: "Windows Server RDP", href: "/windows-rdp" },
   { label: "Managed VPS", href: "/managed-vps" },
-  { label: "Dedicated Server", href: "/dedicated-server" },
   { label: "IVAC Service", href: "/ivac" },
-  { label: "License", href: "/license" },
+  { label: "Dedicated Server", href: "/dedicated-server" },
 ];
 
 const DOMAIN_LINKS = [
@@ -93,7 +93,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-ink-soft transition-colors hover:border-white/30 hover:text-white"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-ink-soft transition-colors hover:border-white/30 hover:text-white"
                   >
                     <Icon name={icon} size={17} />
                   </a>

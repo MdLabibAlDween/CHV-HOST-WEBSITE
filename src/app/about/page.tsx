@@ -53,10 +53,10 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {content.stats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-border-soft bg-slate-50 p-6 text-center dark:border-white/10 dark:bg-white/5">
-                  <p className="gradient-text text-3xl font-extrabold">{stat.value}{stat.suffix}</p>
+                <div key={stat.label} className="rounded-2xl border border-border-soft bg-slate-50 p-4 text-center sm:p-6 dark:border-white/10 dark:bg-white/5">
+                  <p className="gradient-text text-2xl font-extrabold sm:text-3xl">{stat.value}{stat.suffix}</p>
                   <p className="mt-1.5 text-xs font-medium uppercase tracking-wider text-muted">{stat.label}</p>
                 </div>
               ))}

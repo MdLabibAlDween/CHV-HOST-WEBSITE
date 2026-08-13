@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getTlds } from "@/lib/domain";
+import { fetchTlds } from "@/lib/domain";
 import { PageHeader } from "@/components/page-header";
 import { DomainSearch } from "@/components/domain-search";
 import { SectionHeading } from "@/components/section-heading";
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     "Search and register domains at the best prices in Bangladesh. .com, .bd, .net and 40+ extensions with transparent renewal pricing.",
 };
 
-export default function DomainsPage() {
-  const tlds = getTlds();
+export default async function DomainsPage() {
+  const { tlds } = await fetchTlds();
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function DomainsPage() {
             title="Transparent prices, no surprises"
             subtitle="The price shown at search is the price you pay. Renewal and transfer fees are published for every extension."
           />
-          <div className="mt-10 overflow-x-auto rounded-2xl border border-border-soft bg-card shadow-sm dark:border-white/10">
+          <div className="mt-10 hidden overflow-x-auto rounded-2xl border border-border-soft bg-card shadow-sm md:block dark:border-white/10">
             <table className="w-full min-w-[560px] border-collapse text-sm">
               <thead>
                 <tr className="border-b border-border-soft bg-slate-50 text-left dark:border-white/10 dark:bg-white/5">
@@ -68,6 +68,37 @@ export default function DomainsPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="mt-10 space-y-3 md:hidden">
+            {tlds.map((tld) => (
+              <div key={tld.tld} className="rounded-2xl border border-border-soft bg-card p-4 shadow-sm dark:border-white/10">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                    {tld.tld}
+                    {tld.premium && (
+                      <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold uppercase text-amber-700">
+                        Local TLD
+                      </span>
+                    )}
+                  </p>
+                  <p className="text-xs text-muted">{tld.minYears} yr min</p>
+                </div>
+                <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
+                  <div className="rounded-lg bg-slate-50 py-2 dark:bg-white/5">
+                    <dt className="text-[10px] font-semibold uppercase tracking-wider text-muted">Register</dt>
+                    <dd className="mt-0.5 text-sm font-bold text-slate-900 dark:text-slate-100">৳{tld.registerBdt.toLocaleString()}</dd>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 py-2 dark:bg-white/5">
+                    <dt className="text-[10px] font-semibold uppercase tracking-wider text-muted">Renew</dt>
+                    <dd className="mt-0.5 text-sm font-bold text-slate-900 dark:text-slate-100">৳{tld.renewBdt.toLocaleString()}</dd>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 py-2 dark:bg-white/5">
+                    <dt className="text-[10px] font-semibold uppercase tracking-wider text-muted">Transfer</dt>
+                    <dd className="mt-0.5 text-sm font-bold text-slate-900 dark:text-slate-100">৳{tld.transferBdt.toLocaleString()}</dd>
+                  </div>
+                </dl>
+              </div>
+            ))}
           </div>
           <p className="mt-4 text-center text-xs text-muted">
             Prices in BDT for 1 year. USD pricing available at checkout. Final prices are confirmed

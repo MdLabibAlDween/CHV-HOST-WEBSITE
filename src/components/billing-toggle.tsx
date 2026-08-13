@@ -24,7 +24,7 @@ export function BillingToggle({
 
   return (
     <div
-      className="inline-flex rounded-xl border border-border-soft bg-white p-1 dark:border-white/10 dark:bg-ink"
+      className="inline-flex max-w-full flex-wrap justify-center rounded-xl border border-border-soft bg-white p-1 dark:border-white/10 dark:bg-ink"
       role="group"
       aria-label="Select billing period"
     >

@@ -32,6 +32,7 @@ export type Env = {
   useWhmcsProducts: boolean;
   whmcsTimeoutMs: number;
   whmcsCacheTtlMs: number;
+  whmcsConfigured: boolean;
 
   whmHost: string;
   whmUsername: string;
@@ -114,6 +115,10 @@ const cached: Env = {
   useWhmcsProducts: bool("USE_WHMCS_PRODUCTS", false),
   whmcsTimeoutMs: num("WHMCS_TIMEOUT_MS", 8000),
   whmcsCacheTtlMs: num("WHMCS_CACHE_TTL_MS", 120000),
+  whmcsConfigured: (() => {
+    const url = pub("WHMCS_URL").toLowerCase();
+    return Boolean(url && !url.includes("yourdomain.com") && !url.includes("localhost"));
+  })(),
 
   whmHost: str("WHM_HOST"),
   whmUsername: str("WHM_USERNAME"),
