@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getPublicEnv } from "@/lib/env";
 import { PageHeader } from "@/components/page-header";
 import { FAQAccordion } from "@/components/faq-accordion";
+import { LiveChatCard } from "@/components/live-chat-card";
 import { loadSiteContent } from "@/lib/site-config";
 import { Icon } from "@/components/icons";
 
@@ -36,13 +37,6 @@ export default function SupportPage() {
       href: `tel:${env.supportPhone.replace(/\s/g, "")}`,
       cta: env.supportPhone,
     },
-    {
-      icon: "headphones" as const,
-      title: "Live Chat",
-      description: "Instant answers during business hours on the homepage.",
-      href: env.liveChatProviderUrl || "/contact",
-      cta: env.liveChatProviderUrl ? "Start Chatting" : "Chat opens with our live chat provider",
-    },
   ];
 
   return (
@@ -74,6 +68,7 @@ export default function SupportPage() {
                 </p>
               </a>
             ))}
+            <LiveChatCard enabled={Boolean(env.tawkPropertyId && env.tawkWidgetId)} />
           </div>
         </div>
       </section>

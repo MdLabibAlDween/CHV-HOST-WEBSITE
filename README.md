@@ -30,8 +30,7 @@ payments.
 `/` · `/hosting` · `/bdix-hosting` · `/turbo-hosting` · `/reseller-hosting`
 · `/vps` · `/bdix-vps` · `/domains` · `/pricing` · `/about` · `/contact`
 · `/faq` · `/support` · `/status` · `/terms` · `/privacy` · `/refund-policy`
-· `/client-area` (→ WHMCS) · `/checkout` (→ WHMCS cart) · `/admin`
-(content editor)
+· `/client-area` (→ WHMCS) · `/checkout` (→ WHMCS cart)
 
 ### Server-side integration layer (`src/lib/`)
 | Module | Purpose |
@@ -49,8 +48,7 @@ payments.
 ### API routes (`src/app/api/`)
 `/api/products` · `/api/domains/search` · `/api/status` · `/api/contact` ·
 `/api/payment/create` · `/api/payment/webhook` · `/api/payment/return` ·
-`/api/payment/status` · `/api/admin/login` · `/api/admin/config` ·
-`/api/health`
+`/api/payment/status` · `/api/health`
 
 ### WHMCS payment gateway
 See `whmcs-modules/zinipay/README.md`. The **official ZiniPay WHMCS
@@ -65,20 +63,20 @@ All secrets live in `.env` (gitignored). `.env.example` documents every
 variable. Key switches:
 
 ```
-USE_WHMCS_PRODUCTS=false   # true → fetch products/pricing from WHMCS
-ZINIPAY_SANDBOX=true       # sandbox while testing
-ADMIN_PASSWORD=...         # password for /admin content editor
+USE_WHMCS_PRODUCTS=true    # true → fetch products/pricing from WHMCS
+ZINIPAY_SANDBOX=false      # false → live payments
 SMTP_HOST=...              # contact form email transport
 ```
 
 ### Content management
 Marketing content (hero, stats, categories, why-us, testimonials, FAQs,
-status, legal) is defined in `src/config/site-content.ts` and can be
-edited at **`/admin`** — changes are saved to `./content/overrides.json`
-(gitignored) and merged over defaults at load time.
+status, legal) is defined in `src/config/site-content.ts`. There is no
+runtime admin editor; edit the config file and redeploy.
 
 Plans and TLD prices: `./content/plans.json` and `./content/tlds.json`
-(optional overrides), otherwise `src/config/product-catalog.ts`.
+(optional overrides), otherwise `src/config/product-catalog.ts`. With
+`USE_WHMCS_PRODUCTS=true`, product and TLD pricing is fetched live from
+WHMCS and these files act only as fallbacks.
 
 ### Live WHMCS connection
 1. Set `WHMCS_URL`, `WHMCS_API_URL`, `WHMCS_IDENTIFIER`, `WHMCS_SECRET`
@@ -128,8 +126,7 @@ npm run start          # production server on :3000
 - Every payment is verified server-side; no `?status=paid` trust.
 - Idempotent callbacks via the payment ledger; transaction IDs stored.
 - Amount/currency validation against the WHMCS invoice.
-- CSRF: admin session uses an httpOnly signed cookie; POST APIs validate
-  inputs and are rate-limited.
+- POST APIs validate inputs and are rate-limited.
 - XSS: React escapes output; contact form values are HTML-escaped before
   email rendering.
 - Logging redacts API keys, passwords and tokens.

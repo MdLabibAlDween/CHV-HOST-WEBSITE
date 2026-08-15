@@ -38,15 +38,15 @@ function deepMerge<T>(base: T, overrides: unknown): T {
 }
 
 /**
- * Merges default content with runtime overrides written by the /admin
- * editor. Content overrides live in ./content/ (gitignored).
+ * Merges default content with runtime overrides (if present). Content
+ * overrides live in ./content/ (gitignored).
  */
 export function loadSiteContent(): SiteContent {
   const overrides = readJson<unknown>(OVERRIDES_FILE, null);
   return deepMerge(defaultContent, overrides);
 }
 
-/** Plans = defaults overridden by admin-edited plans.json (or future WHMCS mirror). */
+/** Plans = defaults overridden by plans.json (or future WHMCS mirror). */
 export function loadPlans() {
   const overrides = readJson<{ plans?: import("@/lib/site-types").HostingPlan[] }>(PLANS_FILE, {});
   if (Array.isArray(overrides.plans) && overrides.plans.length > 0) return overrides.plans;
@@ -61,21 +61,4 @@ export function loadTlds(): TldConfig[] {
 
 export function loadSiteConfig(): SiteConfigData {
   return { content: loadSiteContent(), tlds: loadTlds() };
-}
-
-/* ------------------------------ Admin writes ------------------------------ */
-
-export function saveContentOverrides(content: unknown): void {
-  fs.mkdirSync(CONTENT_DIR, { recursive: true });
-  fs.writeFileSync(OVERRIDES_FILE, JSON.stringify(content, null, 2), "utf-8");
-}
-
-export function savePlans(plans: unknown): void {
-  fs.mkdirSync(CONTENT_DIR, { recursive: true });
-  fs.writeFileSync(PLANS_FILE, JSON.stringify({ plans }, null, 2), "utf-8");
-}
-
-export function saveTlds(tlds: unknown): void {
-  fs.mkdirSync(CONTENT_DIR, { recursive: true });
-  fs.writeFileSync(TLDS_FILE, JSON.stringify({ tlds }, null, 2), "utf-8");
 }

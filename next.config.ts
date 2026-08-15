@@ -10,7 +10,10 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
-  allowedDevOrigins: ["192.168.1.8"],
+  devIndicators: false,
+  images: {
+    localPatterns: [{ pathname: "/logo.png" }],
+  },
   async headers() {
     return [
       {

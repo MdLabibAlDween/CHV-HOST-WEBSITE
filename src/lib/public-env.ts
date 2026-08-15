@@ -15,6 +15,7 @@ export interface PublicEnv {
   supportPhone: string;
   companyAddress: string;
   logoPath: string;
+  logoVersion: string;
   faviconPath: string;
   primaryColor: string;
   secondaryColor: string;
@@ -22,6 +23,8 @@ export interface PublicEnv {
   gtmId: string;
   metaPixelId: string;
   liveChatProviderUrl: string;
+  tawkPropertyId: string;
+  tawkWidgetId: string;
   whmcsUrl: string;
 }
 
@@ -34,6 +37,7 @@ const PUBLIC_ENV: PublicEnv = {
   supportPhone: process.env.NEXT_PUBLIC_SUPPORT_PHONE || "+880XXXXXXXXXX",
   companyAddress: process.env.NEXT_PUBLIC_COMPANY_ADDRESS || "Your Address, Bangladesh",
   logoPath: process.env.NEXT_PUBLIC_LOGO_PATH || "/logo.png",
+  logoVersion: process.env.NEXT_PUBLIC_LOGO_VERSION || "1",
   faviconPath: process.env.NEXT_PUBLIC_FAVICON_PATH || "/favicon.ico",
   primaryColor: process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#4f46e5",
   secondaryColor: process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#06b6d4",
@@ -41,6 +45,8 @@ const PUBLIC_ENV: PublicEnv = {
   gtmId: process.env.NEXT_PUBLIC_GTM_ID || "",
   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || "",
   liveChatProviderUrl: process.env.NEXT_PUBLIC_LIVE_CHAT_PROVIDER_URL || "",
+  tawkPropertyId: process.env.NEXT_PUBLIC_TAWK_PROPERTY_ID || "",
+  tawkWidgetId: process.env.NEXT_PUBLIC_TAWK_WIDGET_ID || "",
   whmcsUrl: "",
 };
 

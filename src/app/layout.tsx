@@ -102,6 +102,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </>
         )}
 
+        {env.tawkPropertyId && env.tawkWidgetId && (
+          <Script id="tawk-to" strategy="afterInteractive">
+            {`
+              (function(){
+              var origError=console.error,origWarn=console.warn;
+              var filter=function(fn){return function(){for(var i=0;i<arguments.length;i++){if(typeof arguments[i]==='string'&&arguments[i].indexOf('[Tawk/Logger]')!==-1)return;}return fn.apply(console,arguments);};};
+              console.error=filter(origError);console.warn=filter(origWarn);
+              var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+              var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+              s1.async=true;
+              s1.src='https://embed.tawk.to/${env.tawkPropertyId}/${env.tawkWidgetId}';
+              s1.charset='UTF-8';
+              s1.setAttribute('crossorigin','*');
+              s0.parentNode.insertBefore(s1,s0);
+              })();
+            `}
+          </Script>
+        )}
+
         {env.gtmId && (
           <Script id="gtm-init" strategy="afterInteractive">
             {`

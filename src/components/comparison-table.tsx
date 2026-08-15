@@ -1,7 +1,7 @@
 import type { HostingPlan, BillingCycle, CurrencyCode } from "@/lib/site-types";
 import { formatMoney, priceKey, cyclePerLabel } from "@/lib/format";
 import { Icon } from "@/components/icons";
-import { orderHref } from "@/lib/order";
+import { buildOrderHref } from "@/lib/order";
 
 /**
  * Responsive feature comparison: table on large screens, stacked cards
@@ -11,10 +11,12 @@ export function ComparisonTable({
   plans,
   cycle,
   currency,
+  whmcsUrl = "",
 }: {
   plans: HostingPlan[];
   cycle: BillingCycle;
   currency: CurrencyCode;
+  whmcsUrl?: string;
 }) {
   const allSpecs = Array.from(new Map(plans.flatMap((p) => p.resourceSpecs.map((s) => [s.label, s.label]))).values());
 
@@ -76,7 +78,7 @@ export function ComparisonTable({
               {plans.map((plan) => (
                 <td key={plan.id} className="px-5 py-4">
                   <a
-                    href={orderHref(plan, cycle)}
+                    href={buildOrderHref(plan, cycle, whmcsUrl)}
                     className={`inline-flex w-full items-center justify-center gap-1.5 rounded-lg px-4 py-2.5 text-xs font-bold ${
                       plan.popular ? "btn-gradient" : "border border-primary/30 text-primary hover:bg-primary hover:text-white"
                     }`}
@@ -122,7 +124,7 @@ export function ComparisonTable({
                 ))}
               </dl>
               <a
-                href={orderHref(plan, cycle)}
+                href={buildOrderHref(plan, cycle, whmcsUrl)}
                 className={`mt-5 inline-flex w-full items-center justify-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-bold ${
                   plan.popular ? "btn-gradient" : "border border-primary/30 text-primary hover:bg-primary hover:text-white"
                 }`}

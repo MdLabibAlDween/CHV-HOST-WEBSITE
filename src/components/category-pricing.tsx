@@ -14,9 +14,11 @@ import { Icon } from "@/components/icons";
 export function CategoryPricing({
   plans,
   compare = true,
+  whmcsUrl = "",
 }: {
   plans: HostingPlan[];
   compare?: boolean;
+  whmcsUrl?: string;
 }) {
   const { currency } = useCurrency();
   const [cycle, setCycle] = useState<BillingCycle>("monthly");
@@ -60,7 +62,7 @@ export function CategoryPricing({
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {plans.map((plan) => (
-          <PricingCard key={plan.id} plan={plan} cycle={effectiveCycle} currency={effectiveCurrency} />
+          <PricingCard key={plan.id} plan={plan} cycle={effectiveCycle} currency={effectiveCurrency} whmcsUrl={whmcsUrl} />
         ))}
       </div>
 
@@ -73,7 +75,7 @@ export function CategoryPricing({
             Every plan includes cPanel, LiteSpeed, free SSL, daily backups and 24/7 support.
           </p>
           <div className="mt-8">
-            <ComparisonTable plans={plans} cycle={effectiveCycle} currency={effectiveCurrency} />
+            <ComparisonTable plans={plans} cycle={effectiveCycle} currency={effectiveCurrency} whmcsUrl={whmcsUrl} />
           </div>
         </div>
       )}

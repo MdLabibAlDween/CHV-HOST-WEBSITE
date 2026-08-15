@@ -2,7 +2,7 @@ import type { SiteContent } from "@/lib/site-types";
 
 /**
  * Default marketing content for CHV HOST.
- * Overridable at runtime via the /admin editor (stored in /content/overrides.json).
+ * Overridable at runtime via JSON files in ./content/.
  */
 export const defaultContent: SiteContent = {
   company: {
@@ -31,11 +31,11 @@ export const defaultContent: SiteContent = {
     ],
   },
   stats: [
-    { label: "Happy Customers", value: "2,500", suffix: "+" },
+    { label: "Happy Customers", value: "1,000", suffix: "+" },
     { label: "Websites Hosted", value: "4,800", suffix: "+" },
     { label: "Uptime", value: "99.9", suffix: "%" },
     { label: "Support Availability", value: "24/7" },
-    { label: "Years of Experience", value: "5", suffix: "+" },
+    { label: "Years of Experience", value: "3", suffix: "+" },
   ],
   categories: [
     {
@@ -161,11 +161,6 @@ export const defaultContent: SiteContent = {
       description: "Real humans on live chat and tickets — around the clock.",
     },
     {
-      icon: "panel",
-      title: "cPanel Included",
-      description: "The industry-standard control panel, free with every plan.",
-    },
-    {
       icon: "cpu",
       title: "Reliable Infrastructure",
       description: "Redundant power, cooling and networking in modern data centers.",
@@ -269,24 +264,121 @@ export const defaultContent: SiteContent = {
   legal: {
     terms: [
       {
-        heading: "1. Agreement",
-        body: "By purchasing any service from CHV HOST you agree to these terms. Services are provided on a best-effort basis within the limits described on our website and in your client area.",
+        heading: "Introduction",
+        body: 'Welcome to chvhost. Please read these Terms of Service ("Terms", "Agreement") carefully before ordering or using any of our services. By activating an account or purchasing any product from chvhost, you agree to be bound by all terms, conditions, and policies outlined below.',
       },
       {
-        heading: "2. Acceptable Use",
-        body: "Services must not be used for spam, phishing, fraud, illegal content or any activity that harms other customers or third parties. Accounts found in violation may be suspended or terminated.",
+        heading: "1. Account Setup & Verification",
+        items: [
+          "Accuracy of Information: Clients must provide accurate, current, and verifiable contact details during registration.",
+          "Account Security: You are solely responsible for maintaining the confidentiality of your client portal and server access credentials.",
+          "Fraud Prevention: chvhost reserves the right to request identity verification prior to activating services to prevent fraudulent transactions or network abuse.",
+        ],
       },
       {
-        heading: "3. Billing & Renewals",
-        body: "Recurring services are invoiced automatically before renewal. Failure to pay an invoice may result in suspension and eventual termination after the grace period. Suspended accounts may incur reactivation charges.",
+        heading: "2. Services Covered",
+        body: "These Terms apply to all product categories hosted on chvhost, including:",
+        items: [
+          "BDIX Hosting (Shared Hosting / cPanel)",
+          "WordPress Hosting",
+          "Reseller Hosting",
+          "BDIX VPS/RDP",
+          "Windows Server RDP",
+          "Managed VPS",
+          "IVAC Service & Tools",
+          "Dedicated Server",
+          "License (Software & System Licenses)",
+        ],
       },
       {
-        heading: "4. Refunds",
-        body: "Shared and reseller hosting include a 7-day money-back guarantee. VPS refunds are provided pro-rata within the first 3 days. Domain registrations and add-on products are non-refundable once registered.",
+        heading: "3. Strict 3-Day Conditional Refund Policy",
+        body: "SUMMARY: Refunds are issued ONLY for technical defects originating directly from chvhost infrastructure that our support team cannot resolve within 3 days of deployment.",
+        subsections: [
+          {
+            heading: "3.1 Eligibility Criteria",
+            body: "You are eligible for a refund within 3 calendar days (72 hours) of your initial purchase ONLY IF:",
+            items: [
+              "You encounter a technical issue caused directly by chvhost's infrastructure or initial provisioning failure.",
+              "You opened a support ticket or contacted thechvhost@gmail.com detailing the issue.",
+              "Our technical support team is completely unable to solve or fix the issue within 72 hours.",
+            ],
+          },
+          {
+            heading: "3.2 Non-Refundable Scenarios",
+            body: "Refunds will NOT be granted under any of the following conditions:",
+            items: [
+              "Network & Speed Expectations: Dissatisfaction with network speeds, ping/latency, or ISP-specific routing.",
+              "Bandwidth Usage: Issues or restrictions related to international bandwidth consumption.",
+              "User Misconfiguration: Inability of the client to manage, configure, or use the VPS, RDP, or hosting environment.",
+              "Third-Party Services: Software licenses (e.g., cPanel, LiteSpeed, Windows licenses) or IVAC Services once processed or activated.",
+              "AUP Violations: Accounts suspended or terminated due to illegal activity, abuse, or breach of our Acceptable Use Policy.",
+            ],
+          },
+        ],
       },
       {
-        heading: "5. Liability",
-        body: "CHV HOST is not liable for indirect or consequential damages, loss of data, or business interruption. We recommend you maintain your own backups in addition to server-side ones.",
+        heading: "4. International Bandwidth & Fair Usage Policy (FUP)",
+        items: [
+          "Shared Network Allocation: Unless explicitly purchased as a dedicated bandwidth line, all international bandwidth provided across chvhost services is shared among active nodes.",
+          "Fair Usage Monitoring: Continuous high-volume saturation of international bandwidth, continuous video re-streaming, or unauthorized public proxying is strictly prohibited.",
+          "Bandwidth Capping & Throttling: If account usage breaches Fair Usage Policy (FUP) thresholds or impacts other network tenants, chvhost reserves the right to cap, throttle, or limit port speeds immediately without prior notice.",
+        ],
+      },
+      {
+        heading: "5. Backups and Absolute Data Loss Disclaimer",
+        body: "CRITICAL DATA NOTICE: chvhost does NOT maintain automated offsite backups, disaster recovery snapshots, or system restores for client services unless explicitly purchased under a separate managed backup service contract.",
+        items: [
+          "Client Responsibility: The client carries 100% sole responsibility for performing, storing, and managing their own offsite backups, database dumps, website files, and server configurations.",
+          "Zero Liability: chvhost shall NOT be held liable under any circumstances for data loss, file corruption, hardware failure, accidental deletion, ransomware infection, or service interruption.",
+        ],
+      },
+      {
+        heading: "6. Service Specific Terms",
+        subsections: [
+          {
+            heading: "6.1 IVAC Service Disclaimer",
+            body: "Third-Party Portal Dependency: IVAC assistance/services rely entirely on third-party external portals and system availability. chvhost does not control official portal uptime, appointment slot distribution, or application outcomes.",
+            items: [
+              "No Guarantees: Service charges for IVAC assistance cover setup and system tool processing only. Fees are strictly non-refundable once processing begins, regardless of external portal changes or slot availability.",
+            ],
+          },
+          {
+            heading: "6.2 Windows Server RDP & VPS",
+            items: [
+              "Resource Abuse: CPU-heavy tasks such as unauthorized cryptocurrency mining, video rendering, mass mailing, or continuous stress testing are strictly forbidden on shared RDP nodes.",
+              "Software Licensing: Users must comply with standard Microsoft software terms and end-user license agreements.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "7. Acceptable Use Policy (AUP) & Prohibited Content",
+        body: "Services provided by chvhost must be used strictly for lawful purposes. Hosting, transmitting, or linking to any of the following content/activities is strictly illegal and will result in immediate termination without notice or refund:",
+        items: [
+          "Cyberattacks: Launching, participating in, or relaying DDoS/DoS attacks, IP spoofing, or network port scanning.",
+          "Spamming: Sending unsolicited bulk emails (SPAM), mass mailing, or running open mail relays.",
+          "Malicious Software: Hosting or distributing malware, trojans, ransomware, keyloggers, or phishing sites.",
+          "Copyright Infringement: Hosting pirated software, nulled plugins/scripts, unauthorized torrents, or copyrighted streams.",
+          "Illegal Material: Hosting content associated with child exploitation, terrorism, scams, or fraudulent financial schemes.",
+        ],
+      },
+      {
+        heading: "8. Service Suspension and Termination",
+        body: "chvhost reserves the right to suspend or terminate services without refund if:",
+        items: [
+          "Invoices remain unpaid past their due date.",
+          "The account breaches any clause in these Terms or the Acceptable Use Policy.",
+          "Ordered services are targeted by severe incoming DDoS attacks that jeopardize datacenter stability.",
+        ],
+      },
+      {
+        heading: "9. Limitation of Liability",
+        body: "To the maximum extent permitted by law, chvhost, its operators, and infrastructure partners shall not be held liable for any direct, indirect, incidental, special, or consequential damages (including loss of profits, revenue, or data) arising from the use or inability to use our services.",
+      },
+      {
+        heading: "10. Contact Information & Support",
+        body: "If you have questions regarding these Terms, need support, or wish to submit an abuse report, please reach out to us at:",
+        items: ["Support / Abuse Email: thechvhost@gmail.com", "Client Portal: billing.chvhost.com"],
       },
     ],
     privacy: [
@@ -321,15 +413,41 @@ export const defaultContent: SiteContent = {
         body: "VPS services may be refunded pro-rata for the unused portion of the billing period when cancelled within the first 3 days of service.",
       },
       {
-        heading: "3. Non-Refundable Items",
+        heading: "3. Strict 3-Day Conditional Refund Policy",
+        body: "SUMMARY: Refunds are issued ONLY for technical defects originating directly from chvhost infrastructure that our support team cannot resolve within 3 days of deployment.",
+        subsections: [
+          {
+            heading: "3.1 Eligibility Criteria",
+            body: "You are eligible for a refund within 3 calendar days (72 hours) of your initial purchase ONLY IF:",
+            items: [
+              "You encounter a technical issue caused directly by chvhost's infrastructure or initial provisioning failure.",
+              "You opened a support ticket or contacted thechvhost@gmail.com detailing the issue.",
+              "Our technical support team is completely unable to solve or fix the issue within 72 hours.",
+            ],
+          },
+          {
+            heading: "3.2 Non-Refundable Scenarios",
+            body: "Refunds will NOT be granted under any of the following conditions:",
+            items: [
+              "Network & Speed Expectations: Dissatisfaction with network speeds, ping/latency, or ISP-specific routing.",
+              "Bandwidth Usage: Issues or restrictions related to international bandwidth consumption.",
+              "User Misconfiguration: Inability of the client to manage, configure, or use the VPS, RDP, or hosting environment.",
+              "Third-Party Services: Software licenses (e.g., cPanel, LiteSpeed, Windows licenses) or IVAC Services once processed or activated.",
+              "AUP Violations: Accounts suspended or terminated due to illegal activity, abuse, or breach of our Acceptable Use Policy.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "4. Non-Refundable Items",
         body: "Domain registration, renewal and transfer fees are non-refundable once processed. Third-party add-ons and setup items are non-refundable.",
       },
       {
-        heading: "4. How to Request",
+        heading: "5. How to Request",
         body: "Open a support ticket from your client area or email our billing team. Refunds are processed back to the original payment method within 5–7 business days.",
       },
       {
-        heading: "5. Abuse",
+        heading: "6. Abuse",
         body: "Accounts terminated due to violation of our Acceptable Use Policy or Terms of Service are not eligible for refunds.",
       },
     ],

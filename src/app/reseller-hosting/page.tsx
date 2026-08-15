@@ -3,6 +3,7 @@ import { loadSiteContent } from "@/lib/site-config";
 import { fetchPlans, plansByCategory } from "@/lib/providers";
 import { PageHeader } from "@/components/page-header";
 import { CategoryPricing } from "@/components/category-pricing";
+import { getPublicEnv } from "@/lib/env";
 import { FeatureCard } from "@/components/feature-card";
 import { SectionHeading } from "@/components/section-heading";
 import { FAQAccordion } from "@/components/faq-accordion";
@@ -34,6 +35,7 @@ const RESELLER_STEPS = [
 ];
 
 export default async function ResellerHostingPage() {
+  const { whmcsUrl } = getPublicEnv();
   const content = loadSiteContent();
   const { plans } = await fetchPlans();
   const categoryPlans = plansByCategory(plans, "reseller");
@@ -49,7 +51,7 @@ export default async function ResellerHostingPage() {
 
       <section className="bg-white py-16 sm:py-20 dark:bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <CategoryPricing plans={categoryPlans} />
+          <CategoryPricing plans={categoryPlans} whmcsUrl={whmcsUrl} />
         </div>
       </section>
 

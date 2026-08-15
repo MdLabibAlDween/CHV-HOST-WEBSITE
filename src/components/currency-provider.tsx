@@ -21,6 +21,8 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
+      // Hydration-safe one-time read: server renders "BDT", client flips after mount.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (saved === "USD" || saved === "BDT") setCurrencyState(saved);
     } catch {
       /* private mode */

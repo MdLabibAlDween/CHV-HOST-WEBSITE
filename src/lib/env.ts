@@ -16,6 +16,7 @@ export type Env = {
   companyAddress: string;
 
   logoPath: string;
+  logoVersion: string;
   faviconPath: string;
   primaryColor: string;
   secondaryColor: string;
@@ -51,8 +52,9 @@ export type Env = {
   domainRegistrarApiKey: string;
   domainRegistrarApiSecret: string;
 
-  adminPassword: string;
   liveChatProviderUrl: string;
+  tawkPropertyId: string;
+  tawkWidgetId: string;
 
   smtpHost: string;
   smtpPort: number;
@@ -99,6 +101,7 @@ const cached: Env = {
   companyAddress: pub("COMPANY_ADDRESS", "Your Address, Bangladesh"),
 
   logoPath: pub("LOGO_PATH", "/logo.png"),
+  logoVersion: pub("LOGO_VERSION", "1"),
   faviconPath: pub("FAVICON_PATH", "/favicon.ico"),
   primaryColor: pub("PRIMARY_COLOR", "#4f46e5"),
   secondaryColor: pub("SECONDARY_COLOR", "#06b6d4"),
@@ -137,8 +140,9 @@ const cached: Env = {
   domainRegistrarApiKey: str("DOMAIN_REGISTRAR_API_KEY"),
   domainRegistrarApiSecret: str("DOMAIN_REGISTRAR_API_SECRET"),
 
-  adminPassword: str("ADMIN_PASSWORD", "change-me-before-deploy"),
   liveChatProviderUrl: str("LIVE_CHAT_PROVIDER_URL"),
+  tawkPropertyId: pub("TAWK_PROPERTY_ID"),
+  tawkWidgetId: pub("TAWK_WIDGET_ID"),
 
   smtpHost: str("SMTP_HOST"),
   smtpPort: num("SMTP_PORT", 587),
@@ -169,6 +173,7 @@ export function getPublicEnv() {
     supportPhone: cached.supportPhone,
     companyAddress: cached.companyAddress,
     logoPath: cached.logoPath,
+    logoVersion: cached.logoVersion,
     faviconPath: cached.faviconPath,
     primaryColor: cached.primaryColor,
     secondaryColor: cached.secondaryColor,
@@ -176,6 +181,8 @@ export function getPublicEnv() {
     gtmId: cached.gtmId,
     metaPixelId: cached.metaPixelId,
     liveChatProviderUrl: cached.liveChatProviderUrl,
+    tawkPropertyId: cached.tawkPropertyId,
+    tawkWidgetId: cached.tawkWidgetId,
     whmcsUrl: whmcsConfigured() ? cached.whmcsUrl : "",
   };
 }

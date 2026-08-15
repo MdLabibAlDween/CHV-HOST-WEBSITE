@@ -213,9 +213,28 @@ function toPositiveNumber(v: unknown): number | undefined {
 }
 
 /**
+ * WHMCS 8.12+ returns each price nested by period, e.g. { "1": "16.99" }
+ * (1-year). Some builds return a flat number. This resolves the price for
+ * the shortest (1-year) period, falling back to a flat numeric value.
+ */
+function resolvePrice(v: unknown): number | undefined {
+  if (typeof v === "number" || typeof v === "string") return toPositiveNumber(v);
+  if (isRecord(v)) {
+    for (const period of ["1", "12"]) {
+      const n = toPositiveNumber(v[period]);
+      if (n !== undefined) return n;
+    }
+    const any = Object.values(v).find((x) => x !== undefined);
+    return toPositiveNumber(any);
+  }
+  return undefined;
+}
+
+/**
  * Parse a GetTLDPricing response into { "<tld>": prices }. WHMCS returns
- * an object keyed by TLD (each with register/renew/transfer); some builds
- * nest per-currency objects instead. Null when nothing is priced.
+ * an object keyed by TLD (each with register/renew/transfer), with prices
+ * nested per period; some builds nest per-currency objects instead. Null
+ * when nothing is priced.
  */
 function parseTldPrices(raw: Record<string, unknown>): Record<string, TldPrices> | null {
   const pricing = raw.pricing;
@@ -229,14 +248,15 @@ function parseTldPrices(raw: Record<string, unknown>): Record<string, TldPrices>
 
   const out: Record<string, TldPrices> = {};
   for (const [tld, value] of Object.entries(tldMap)) {
-    if (!tld.startsWith(".") || !isRecord(value)) continue;
+    const dotted = tld.startsWith(".") ? tld : `.${tld}`;
+    if (!isRecord(value)) continue;
     const prices = {
-      register: toPositiveNumber(value.register),
-      renew: toPositiveNumber(value.renew),
-      transfer: toPositiveNumber(value.transfer),
+      register: resolvePrice(value.register),
+      renew: resolvePrice(value.renew),
+      transfer: resolvePrice(value.transfer),
     };
     if (prices.register !== undefined || prices.renew !== undefined || prices.transfer !== undefined) {
-      out[tld] = prices;
+      out[dotted] = prices;
     }
   }
   return Object.keys(out).length > 0 ? out : null;

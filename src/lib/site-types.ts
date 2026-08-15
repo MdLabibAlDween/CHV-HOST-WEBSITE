@@ -169,14 +169,21 @@ export interface SiteContent {
     emailLabel: string;
   };
   legal: {
-    terms: { heading: string; body: string }[];
+    terms: LegalTermsSection[];
     privacy: { heading: string; body: string }[];
-    refund: { heading: string; body: string }[];
+    refund: LegalTermsSection[];
   };
   footer: {
     description: string;
     socials: { label: string; url: string }[];
   };
+}
+
+export interface LegalTermsSection {
+  heading: string;
+  body?: string;
+  items?: string[];
+  subsections?: { heading: string; body?: string; items?: string[] }[];
 }
 
 export interface TldConfig {

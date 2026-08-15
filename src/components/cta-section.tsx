@@ -19,7 +19,7 @@ export function CTASection({
     <section className="relative overflow-hidden bg-ink py-20" aria-label="Call to action">
       <div className="bg-grid-dark absolute inset-0" aria-hidden="true" />
       <div
-        className="absolute -top-32 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
+        className="absolute -top-32 left-1/2 h-72 w-[36rem] max-w-full -translate-x-1/2 rounded-full opacity-25 blur-3xl"
         style={{
           backgroundImage: "linear-gradient(100deg, var(--brand-primary), var(--brand-secondary))",
         }}

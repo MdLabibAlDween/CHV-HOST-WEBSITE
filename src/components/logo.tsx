@@ -43,7 +43,7 @@ export function Logo({ light = false, size = "md" }: { light?: boolean; size?: "
     return (
       <span className="flex items-center gap-2.5">
         <Image
-          src={env.logoPath}
+          src={`${env.logoPath}?v=${env.logoVersion}`}
           alt={`${env.siteName} logo`}
           width={size === "lg" ? 40 : 34}
           height={size === "lg" ? 40 : 34}

@@ -1,20 +1,22 @@
 import type { HostingPlan, BillingCycle, CurrencyCode } from "@/lib/site-types";
 import { formatMoney, cyclePerLabel, priceKey } from "@/lib/format";
 import { Icon } from "@/components/icons";
-import { orderHref } from "@/lib/order";
+import { buildOrderHref } from "@/lib/order";
 
 export function PricingCard({
   plan,
   cycle,
   currency,
+  whmcsUrl = "",
 }: {
   plan: HostingPlan;
   cycle: BillingCycle;
   currency: CurrencyCode;
+  whmcsUrl?: string;
 }) {
   const price = plan.prices[priceKey(currency)][cycle];
   const hasPrice = price !== undefined;
-  const href = orderHref(plan, cycle);
+  const href = buildOrderHref(plan, cycle, whmcsUrl);
 
   return (
     <div

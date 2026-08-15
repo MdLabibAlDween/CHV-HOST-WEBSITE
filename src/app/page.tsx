@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { loadSiteContent } from "@/lib/site-config";
-import { fetchPlans, plansByCategory } from "@/lib/providers";
+import { getPublicEnv } from "@/lib/env";
+import { fetchPlans } from "@/lib/providers";
+import { type PlanCategory } from "@/lib/site-types";
 import { SectionHeading } from "@/components/section-heading";
 import { FeatureCard } from "@/components/feature-card";
 import { TestimonialCard } from "@/components/testimonial-card";
@@ -39,9 +41,10 @@ const WHY_ICONS: Record<string, IconName> = {
 };
 
 export default async function HomePage() {
+  const env = getPublicEnv();
   const content = loadSiteContent();
   const { plans } = await fetchPlans();
-  const featured = plansByCategory(plans, "bdix");
+  const planCategories: PlanCategory[] = ["bdix", "bdix-vps", "managed-vps"];
 
   return (
     <>
@@ -49,14 +52,14 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-ink">
         <div className="bg-grid-dark absolute inset-0" aria-hidden="true" />
         <div
-          className="absolute -top-40 left-1/4 h-96 w-96 rounded-full animate-pulse-glow blur-3xl"
+          className="absolute -top-40 left-1/4 h-96 w-96 max-w-[75vw] rounded-full animate-pulse-glow blur-3xl"
           style={{
             backgroundImage: "linear-gradient(120deg, var(--brand-primary), var(--brand-secondary))",
           }}
           aria-hidden="true"
         />
         <div
-          className="absolute -bottom-32 right-10 h-80 w-80 rounded-full animate-pulse-glow blur-3xl [animation-delay:3s]"
+          className="absolute -bottom-32 right-10 h-80 w-80 max-w-[calc(100vw-2.5rem)] rounded-full animate-pulse-glow blur-3xl [animation-delay:3s]"
           style={{ background: "var(--brand-secondary)" }}
           aria-hidden="true"
         />
@@ -216,7 +219,7 @@ export default async function HomePage() {
             subtitle="All plans include cPanel, LiteSpeed, free SSL, daily backups and 24/7 support."
           />
           <div className="mt-12">
-            <PricingSection plans={featured} />
+            <PricingSection plans={plans} categories={planCategories} whmcsUrl={env.whmcsUrl} />
           </div>
           <p className="mt-6 text-center text-xs text-muted">
             Prices shown in BDT/USD. Switch billing cycles and currency above. Final prices are
@@ -229,7 +232,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-ink py-20" aria-labelledby="domain-heading">
         <div className="bg-grid-dark absolute inset-0" aria-hidden="true" />
         <div
-          className="absolute -top-24 right-1/4 h-72 w-96 rounded-full opacity-20 blur-3xl"
+          className="absolute -top-24 right-1/4 h-72 w-96 max-w-[75vw] rounded-full opacity-20 blur-3xl"
           style={{
             backgroundImage: "linear-gradient(120deg, var(--brand-primary), var(--brand-secondary))",
           }}

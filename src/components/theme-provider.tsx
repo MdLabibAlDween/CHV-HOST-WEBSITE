@@ -22,18 +22,18 @@ function applyTheme(t: Theme) {
   root.style.colorScheme = t;
 }
 
-/** Read persisted theme; defaults to dark. */
-function initialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
-  try {
-    return window.localStorage.getItem(STORAGE_KEY) === "light" ? "light" : "dark";
-  } catch {
-    return "dark";
-  }
-}
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(initialTheme);
+  const [theme, setThemeState] = useState<Theme>("dark");
+
+  useEffect(() => {
+    let stored: Theme = "dark";
+    try {
+      stored = window.localStorage.getItem(STORAGE_KEY) === "light" ? "light" : "dark";
+    } catch {
+      /* private mode */
+    }
+    setThemeState(stored);
+  }, []);
 
   useEffect(() => {
     applyTheme(theme);

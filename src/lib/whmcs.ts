@@ -28,9 +28,9 @@ function isConfigured(): boolean {
 }
 
 /** True when the WHMCS base URL is a real value, not a placeholder. */
-function hasRealUrl(): boolean {
-  const url = getEnv().whmcsUrl.toLowerCase();
-  return Boolean(getEnv().whmcsUrl && !url.includes("yourdomain.com") && !url.includes("localhost"));
+function hasRealUrl(url: string): boolean {
+  const u = url.toLowerCase();
+  return Boolean(url && !u.includes("yourdomain.com") && !u.includes("localhost"));
 }
 
 export async function whmcsRequest(
@@ -95,24 +95,28 @@ export async function whmcsRequest(
 /**
  * WHMCS cart URL for a product + billing cycle. Uses the legacy cart
  * add-to-cart flow which preserves billing as the WHMCS source of truth.
+ *
+ * `baseUrl` is optional and meant for deterministic server-propagated
+ * hrefs (client hydration must never re-read process.env here).
  */
 export function whmcsCartUrl(
   pid: number | undefined,
   billingCycle: string,
   extras?: Record<string, string>,
+  baseUrl?: string,
 ): string {
-  const env = getEnv();
-  if (!hasRealUrl()) return "";
+  const base = baseUrl ?? getEnv().whmcsUrl;
+  if (!hasRealUrl(base)) return "";
   const params = new URLSearchParams();
   params.set("a", "add");
   if (pid) params.set("pid", String(pid));
   params.set("billingcycle", billingCycle);
   for (const [k, v] of Object.entries(extras ?? {})) params.set(k, v);
-  return `${env.whmcsUrl.replace(/\/$/, "")}/cart.php?${params.toString()}`;
+  return `${base.replace(/\/$/, "")}/cart.php?${params.toString()}`;
 }
 
 export function whmcsClientAreaUrl(path = ""): string {
   const env = getEnv();
-  if (!hasRealUrl()) return "";
+  if (!hasRealUrl(env.whmcsUrl)) return "";
   return `${env.whmcsUrl.replace(/\/$/, "")}/${path}`;
 }

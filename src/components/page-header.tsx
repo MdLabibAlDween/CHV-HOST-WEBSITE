@@ -16,7 +16,7 @@ export function PageHeader({
     <section className="relative overflow-hidden bg-ink py-16 sm:py-20">
       <div className="bg-grid-dark absolute inset-0" aria-hidden="true" />
       <div
-        className="absolute -top-24 right-1/4 h-64 w-96 rounded-full opacity-20 blur-3xl"
+        className="absolute -top-24 right-1/4 h-64 w-96 max-w-[75vw] rounded-full opacity-20 blur-3xl"
         style={{
           backgroundImage: "linear-gradient(120deg, var(--brand-primary), var(--brand-secondary))",
         }}

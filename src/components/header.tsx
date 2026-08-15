@@ -58,10 +58,6 @@ function NavLink({
     return (
       <li
         className="relative"
-        onMouseEnter={() => onOpenChange(index)}
-        onMouseLeave={() => {
-          if (open) onOpenChange(null);
-        }}
         onFocus={() => onOpenChange(index)}
         onBlur={(e) => {
           if (open && !e.currentTarget.contains(e.relatedTarget as Node)) onOpenChange(null);
@@ -74,7 +70,9 @@ function NavLink({
           }`}
           aria-expanded={open}
           aria-haspopup="true"
-          onClick={() => onOpenChange(open ? null : index)}
+          onClick={() => {
+            if (!open) onOpenChange(index);
+          }}
         >
           {item.label}
           <Icon name="chevron-down" size={14} className={open ? "rotate-180" : ""} />
@@ -170,7 +168,7 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav aria-label="Main navigation" className="hidden lg:block">
+        <nav aria-label="Main navigation" className="hidden xl:block">
           <div ref={desktopNavRef}>
             <ul className="flex items-center gap-1">
               {NAV.map((item, index) => (
@@ -186,7 +184,7 @@ export function Header() {
           </div>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <button
             type="button"
             onClick={toggleTheme}
@@ -210,7 +208,7 @@ export function Header() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <button
             type="button"
             onClick={toggleTheme}
@@ -221,7 +219,7 @@ export function Header() {
           </button>
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-soft text-slate-700 lg:hidden dark:border-white/10 dark:text-slate-300"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-soft text-slate-700 xl:hidden dark:border-white/10 dark:text-slate-300"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -233,7 +231,7 @@ export function Header() {
       </div>
 
       {menuOpen && (
-        <div id="mobile-menu" className="border-t border-border-soft bg-white lg:hidden dark:border-white/10 dark:bg-ink">
+        <div id="mobile-menu" className="border-t border-border-soft bg-white xl:hidden dark:border-white/10 dark:bg-ink">
           <nav aria-label="Mobile navigation" className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
             <ul className="flex flex-col gap-1">
               {NAV.map((item) => (

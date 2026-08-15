@@ -19,7 +19,6 @@ type LogEvent =
   | "PROVISIONING_FAILED"
   | "DOMAIN_SEARCH"
   | "CONTACT_FORM"
-  | "ADMIN_ACTION"
   | "APP_ERROR";
 
 const SECRET_PATTERNS: RegExp[] = [
