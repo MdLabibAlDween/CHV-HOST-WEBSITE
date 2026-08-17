@@ -146,11 +146,6 @@ export const defaultContent: SiteContent = {
       description: "Free SSL certificates on every account, installed automatically.",
     },
     {
-      icon: "clock",
-      title: "Daily Backups",
-      description: "Automated daily backups keep your data safe and restorable.",
-    },
-    {
       icon: "lock",
       title: "Security Protection",
       description: "Proactive firewall rules and malware scanning on every server.",
