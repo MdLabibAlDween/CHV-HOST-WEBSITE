@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { fetchTlds } from "@/lib/domain";
 import { PageHeader } from "@/components/page-header";
 import { DomainSearch } from "@/components/domain-search";
@@ -104,42 +103,6 @@ export default async function DomainsPage() {
             Prices in BDT for 1 year. USD pricing available at checkout. Final prices are confirmed
             by our billing system.
           </p>
-        </div>
-      </section>
-
-      {/* Domain + hosting upsell */}
-      <section className="bg-white py-16 dark:bg-transparent">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="rounded-3xl border border-border-soft bg-gradient-to-br from-slate-50 to-white p-8 shadow-sm sm:p-10 dark:border-white/10 dark:from-white/5 dark:to-transparent">
-            <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
-              <div className="max-w-xl">
-                <h2 className="flex items-center gap-2 text-xl font-extrabold text-slate-900 sm:text-2xl dark:text-slate-100">
-                  <Icon name="sparkles" size={22} className="text-primary" />
-                  Save when you bundle
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
-                  Register your domain and add hosting in one order. Bundle deals include a free
-                  .com with annual web hosting, free SSL and a free migration if you already have a
-                  site elsewhere.
-                </p>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href="/bdix-hosting"
-                  className="btn-gradient inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold"
-                >
-                  Domain + Hosting
-                  <Icon name="arrow-right" size={16} />
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-border-soft px-6 py-3 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary dark:border-white/10 dark:text-slate-300"
-                >
-                  View Pricing
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

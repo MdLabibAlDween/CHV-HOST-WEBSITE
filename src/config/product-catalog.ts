@@ -15,7 +15,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix",
     name: "Starter",
     tagline: "Perfect for a first website or blog.",
-    whmcsPid: 1,
+    whmcsPid: 29,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 49, annually: 490 },
@@ -44,7 +44,7 @@ export const defaultPlans: HostingPlan[] = [
     name: "Business",
     tagline: "Our most popular plan for growing sites.",
     popular: true,
-    whmcsPid: 2,
+    whmcsPid: 30,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 99, annually: 990 },
@@ -73,7 +73,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix",
     name: "Professional",
     tagline: "For online stores and business sites.",
-    whmcsPid: 3,
+    whmcsPid: 31,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 199, annually: 1990 },
@@ -102,7 +102,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix",
     name: "Enterprise",
     tagline: "Maximum resources for demanding projects.",
-    whmcsPid: 4,
+    whmcsPid: 32,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 399, annually: 3990 },
@@ -133,7 +133,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix",
     name: "BDIX Basic",
     tagline: "Local hosting for a personal site.",
-    whmcsPid: 11,
+    whmcsPid: 33,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 69, annually: 690 },
@@ -162,7 +162,7 @@ export const defaultPlans: HostingPlan[] = [
     name: "BDIX Standard",
     tagline: "Low-latency hosting for Bangladeshi visitors.",
     popular: true,
-    whmcsPid: 12,
+    whmcsPid: 34,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 129, annually: 1290 },
@@ -190,7 +190,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix",
     name: "BDIX Business",
     tagline: "For businesses with high local traffic.",
-    whmcsPid: 13,
+    whmcsPid: 35,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 249, annually: 2490 },
@@ -220,7 +220,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix",
     name: "Turbo Start",
     tagline: "Performance shared hosting to start.",
-    whmcsPid: 21,
+    whmcsPid: 36,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 129, annually: 1290 },
@@ -250,7 +250,7 @@ export const defaultPlans: HostingPlan[] = [
     name: "Turbo Pro",
     tagline: "Serious speed for serious sites.",
     popular: true,
-    whmcsPid: 22,
+    whmcsPid: 37,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 249, annually: 2490 },
@@ -279,7 +279,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix",
     name: "Turbo Max",
     tagline: "The fastest shared hosting we offer.",
-    whmcsPid: 23,
+    whmcsPid: 38,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 449, annually: 4490 },
@@ -310,7 +310,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "reseller",
     name: "Silver",
     tagline: "Start your hosting business today.",
-    whmcsPid: 31,
+    whmcsPid: 39,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 299, annually: 2990 },
@@ -339,7 +339,7 @@ export const defaultPlans: HostingPlan[] = [
     name: "Gold",
     tagline: "For growing hosting resellers.",
     popular: true,
-    whmcsPid: 32,
+    whmcsPid: 40,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 599, annually: 5990 },
@@ -367,7 +367,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "reseller",
     name: "Platinum",
     tagline: "Scale without limits.",
-    whmcsPid: 33,
+    whmcsPid: 41,
     billingCycles: ["monthly", "annually"],
     prices: {
       bdt: { monthly: 1199, annually: 11990 },
@@ -397,7 +397,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix-vps",
     name: "V1",
     tagline: "Entry-level VPS for small projects.",
-    whmcsPid: 41,
+    whmcsPid: 42,
     billingCycles: ["monthly", "quarterly", "annually"],
     prices: {
       bdt: { monthly: 699, quarterly: 1997, annually: 6990 },
@@ -427,7 +427,7 @@ export const defaultPlans: HostingPlan[] = [
     name: "V2",
     tagline: "Balanced performance for websites.",
     popular: true,
-    whmcsPid: 42,
+    whmcsPid: 43,
     billingCycles: ["monthly", "quarterly", "annually"],
     prices: {
       bdt: { monthly: 1299, quarterly: 3699, annually: 12990 },
@@ -456,7 +456,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix-vps",
     name: "V4",
     tagline: "For resource-hungry applications.",
-    whmcsPid: 43,
+    whmcsPid: 44,
     billingCycles: ["monthly", "quarterly", "annually"],
     prices: {
       bdt: { monthly: 2599, quarterly: 7399, annually: 25990 },
@@ -485,7 +485,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix-vps",
     name: "V8",
     tagline: "High-performance for production workloads.",
-    whmcsPid: 44,
+    whmcsPid: 45,
     billingCycles: ["monthly", "quarterly", "annually"],
     prices: {
       bdt: { monthly: 5199, quarterly: 14799, annually: 51990 },
@@ -516,7 +516,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix-vps",
     name: "B1",
     tagline: "Local VPS for fast BDIX connectivity.",
-    whmcsPid: 51,
+    whmcsPid: 46,
     billingCycles: ["monthly", "quarterly", "annually"],
     prices: {
       bdt: { monthly: 899, quarterly: 2567, annually: 8990 },
@@ -546,7 +546,7 @@ export const defaultPlans: HostingPlan[] = [
     name: "B2",
     tagline: "Low-latency hosting for BD visitors.",
     popular: true,
-    whmcsPid: 52,
+    whmcsPid: 47,
     billingCycles: ["monthly", "quarterly", "annually"],
     prices: {
       bdt: { monthly: 1699, quarterly: 4849, annually: 16990 },
@@ -575,7 +575,7 @@ export const defaultPlans: HostingPlan[] = [
     category: "bdix-vps",
     name: "B4",
     tagline: "Powerful local VPS for heavy workloads.",
-    whmcsPid: 53,
+    whmcsPid: 48,
     billingCycles: ["monthly", "quarterly", "annually"],
     prices: {
       bdt: { monthly: 3299, quarterly: 9409, annually: 32990 },
@@ -602,13 +602,14 @@ export const defaultPlans: HostingPlan[] = [
 ];
 
 export const defaultTlds = [
-  { tld: ".com", registerBdt: 1090, registerUsd: 11, renewBdt: 1390, renewUsd: 14, transferBdt: 1090, transferUsd: 11, minYears: 1 },
-  { tld: ".net", registerBdt: 1190, registerUsd: 12, renewBdt: 1490, renewUsd: 15, transferBdt: 1190, transferUsd: 12, minYears: 1 },
+  { tld: ".com", registerBdt: 1299, registerUsd: 12.99, renewBdt: 1999, renewUsd: 19.99, transferBdt: 1999, transferUsd: 19.99, minYears: 1 },
+  { tld: ".net", registerBdt: 1699, registerUsd: 16.99, renewBdt: 1799, renewUsd: 17.99, transferBdt: 1799, transferUsd: 17.99, minYears: 1 },
   { tld: ".org", registerBdt: 1190, registerUsd: 12, renewBdt: 1490, renewUsd: 15, transferBdt: 1190, transferUsd: 12, minYears: 1 },
   { tld: ".info", registerBdt: 990, registerUsd: 10, renewBdt: 1290, renewUsd: 13, transferBdt: 990, transferUsd: 10, minYears: 1 },
-  { tld: ".xyz", registerBdt: 490, registerUsd: 5, renewBdt: 1090, renewUsd: 11, transferBdt: 490, transferUsd: 5, minYears: 1 },
+  { tld: ".xyz", registerBdt: 399, registerUsd: 3.99, renewBdt: 1399, renewUsd: 13.99, transferBdt: 1399, transferUsd: 13.99, minYears: 1 },
+  { tld: ".shop", registerBdt: 399, registerUsd: 3.99, renewBdt: 4399, renewUsd: 43.99, transferBdt: 4399, transferUsd: 43.99, minYears: 1 },
   { tld: ".online", registerBdt: 1290, registerUsd: 13, renewBdt: 1590, renewUsd: 16, transferBdt: 1290, transferUsd: 13, minYears: 1 },
-  { tld: ".store", registerBdt: 1490, registerUsd: 15, renewBdt: 1790, renewUsd: 18, transferBdt: 1490, transferUsd: 15, minYears: 1 },
+  { tld: ".store", registerBdt: 1999, registerUsd: 19.99, renewBdt: 1999, renewUsd: 19.99, transferBdt: 1999, transferUsd: 19.99, minYears: 1 },
   { tld: ".bd", registerBdt: 2490, registerUsd: 25, renewBdt: 2490, renewUsd: 25, transferBdt: 2490, transferUsd: 25, premium: true, minYears: 1 },
   { tld: ".com.bd", registerBdt: 1490, registerUsd: 15, renewBdt: 1490, renewUsd: 15, transferBdt: 1490, transferUsd: 15, premium: true, minYears: 1 },
   { tld: ".net.bd", registerBdt: 1490, registerUsd: 15, renewBdt: 1490, renewUsd: 15, transferBdt: 1490, transferUsd: 15, premium: true, minYears: 1 },
