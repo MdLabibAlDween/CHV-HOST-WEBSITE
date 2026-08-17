@@ -31,8 +31,8 @@ export const defaultContent: SiteContent = {
     ],
   },
   stats: [
-    { label: "Happy Customers", value: "1,000", suffix: "+" },
-    { label: "Websites Hosted", value: "4,800", suffix: "+" },
+    { label: "Happy Customers", value: "500", suffix: "+" },
+    { label: "Websites Hosted", value: "1,000", suffix: "+" },
     { label: "Uptime", value: "99.9", suffix: "%" },
     { label: "Support Availability", value: "24/7" },
     { label: "Years of Experience", value: "3", suffix: "+" },
