@@ -195,9 +195,6 @@ export default async function HomePage() {
                 </span>
                 <h3 className="mt-4 text-base font-bold text-slate-900 dark:text-slate-100">{category.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted">{category.description}</p>
-                <p className="mt-3 text-sm">
-                  <span className="font-extrabold text-slate-900 dark:text-slate-100">{category.startingPrice}</span>
-                </p>
                 <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                   {category.cta}
                   <Icon
