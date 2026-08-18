@@ -10,6 +10,8 @@ import { FAQAccordion } from "@/components/faq-accordion";
 import { CTASection } from "@/components/cta-section";
 import { Icon } from "@/components/icons";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "BDIX Hosting",
   description:

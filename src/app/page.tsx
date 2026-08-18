@@ -13,6 +13,8 @@ import { PricingSection } from "@/components/pricing-section";
 import { DomainSearch } from "@/components/domain-search";
 import { Icon, type IconName } from "@/components/icons";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Cheap Hosting & VPS in Bangladesh",
   description:

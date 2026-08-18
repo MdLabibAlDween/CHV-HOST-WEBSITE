@@ -8,6 +8,8 @@ import { FAQAccordion } from "@/components/faq-accordion";
 import { CTASection } from "@/components/cta-section";
 import { SectionHeading } from "@/components/section-heading";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Pricing",
   description:

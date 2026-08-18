@@ -9,6 +9,8 @@ import { SectionHeading } from "@/components/section-heading";
 import { FAQAccordion } from "@/components/faq-accordion";
 import { CTASection } from "@/components/cta-section";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Reseller Hosting",
   description:
