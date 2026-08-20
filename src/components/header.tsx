@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Logo } from "@/components/logo";
 import { Icon } from "@/components/icons";
 import { useEnv } from "@/lib/public-env";
@@ -120,6 +120,9 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const desktopNavRef = useRef<HTMLDivElement>(null);
+  // Page scroll position at the moment the mobile menu was opened. Captured
+  // before the menu renders so closing the menu restores the exact spot.
+  const scrollPosRef = useRef(0);
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   useEffect(() => {
@@ -127,6 +130,43 @@ export function Header() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Lock background scrolling while the mobile menu is open. Fixing the body
+  // (and offsetting it by the current scroll position) keeps the sticky
+  // header's scroll container intact — unlike overflow:hidden, which detaches
+  // the sticky header and sends the in-flow menu off-screen above the
+  // viewport when the page is already scrolled. The previous inline styles
+  // are preserved and restored on close, and the page's scroll position is
+  // restored so closing the menu does not jump.
+  useLayoutEffect(() => {
+    if (!menuOpen) return;
+    const { body } = document;
+    const prevPosition = body.style.position;
+    const prevTop = body.style.top;
+    const prevWidth = body.style.width;
+    const scrollY = window.scrollY;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+    return () => {
+      body.style.position = prevPosition;
+      body.style.top = prevTop;
+      body.style.width = prevWidth;
+      window.scrollTo(0, scrollPosRef.current);
+    };
+  }, [menuOpen]);
+
+  // If the viewport grows past the mobile breakpoint (rotated tablet,
+  // resized window), close the menu so the desktop nav takes over and the
+  // scroll lock is released.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1280px)");
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setMenuOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   const [prevPathname, setPrevPathname] = useState(pathname);
@@ -223,7 +263,10 @@ export function Header() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMenuOpen((o) => !o)}
+            onClick={() => {
+              if (!menuOpen) scrollPosRef.current = window.scrollY;
+              setMenuOpen((o) => !o);
+            }}
           >
             <Icon name={menuOpen ? "x" : "menu"} size={22} />
           </button>
@@ -231,7 +274,10 @@ export function Header() {
       </div>
 
       {menuOpen && (
-        <div id="mobile-menu" className="border-t border-border-soft bg-white xl:hidden dark:border-white/10 dark:bg-ink">
+        <div
+          id="mobile-menu"
+          className="mobile-menu-panel border-t border-border-soft bg-white xl:hidden dark:border-white/10 dark:bg-ink"
+        >
           <nav aria-label="Mobile navigation" className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
             <ul className="flex flex-col gap-1">
               {NAV.map((item) => (

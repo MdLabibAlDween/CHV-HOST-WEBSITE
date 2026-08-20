@@ -256,6 +256,22 @@ body {
   border-radius: 8px;
 }
 
+/*
+ * Mobile navigation panel.
+ * Constrained to the visible viewport (100dvh tracks mobile browser chrome
+ * show/hide; 100vh is the fallback for browsers without dvh support) so the
+ * menu scrolls internally instead of chaining scroll onto the page behind it.
+ * overscroll-behavior: contain stops scroll chaining at the menu's top/bottom
+ * edges while still allowing the menu itself to scroll normally.
+ */
+.mobile-menu-panel {
+  max-height: calc(100vh - 4rem);
+  max-height: calc(100dvh - 4rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
